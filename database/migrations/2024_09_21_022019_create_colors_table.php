@@ -11,8 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('locations', function (Blueprint $table) {
+        //Bảng màu sắc
+        Schema::create('colors', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 255);//Tên màu sắc
+            $table->string('color_code',255);//Mã màu
             $table->timestamps();
         });
     }
@@ -22,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('locations');
+        Schema::dropIfExists('colors');
     }
 };

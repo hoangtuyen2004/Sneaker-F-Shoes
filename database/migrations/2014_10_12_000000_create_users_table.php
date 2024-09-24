@@ -11,17 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
+        //Bảng người dùng
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('user_code');//Mã khách hàng
-            $table->string('name');//Họ tên
-            $table->string('email')->unique();//Email
+            $table->string('user_code',10);//Mã khách hàng
+            $table->string('name',255);//Họ tên
+            $table->string('email',255)->unique();//Email
             $table->date('birthday');//Ngày sinh
-            $table->string('phone_number');//Số điện thoại
-            $table->string('gender');//Giới tính
+            $table->string('phone_number',20);//Số điện thoại
+            $table->enum('gender', ['Nam', 'Nữ', 'Khác']);//Giới tính
             $table->string('image')->nullable();//Ảnh
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('password');
+            $table->string('password');//Mật khẩu
+            $table->enum('status',['Hoạt động', 'Đã khóa', 'Xóa']);//Trạng thái tài khoản
+            $table->enum('role', ['Khách hàng', 'Nhân viên', 'Quản lý']);//Chức vụ
             $table->rememberToken();
             $table->timestamps();
         });
