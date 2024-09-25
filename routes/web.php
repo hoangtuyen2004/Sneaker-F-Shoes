@@ -14,5 +14,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('clients.home.index');
 });
+
+// Dashboards
+Route::get('wp-admin', function () { return view('admins.dashboards.index');});
+
+
+//Route resource quản ý người dùng
+Route::resource('user', App\Http\Controllers\admins\UserController::class);
