@@ -5,141 +5,49 @@
                 <div class="left-sidebar-content">
                     <ul class="sidebar-elements">
                         <li class="divider">Menu</li>
-                        <li class="active"><a href="index.html"><i
-                                    class="icon mdi mdi-home"></i><span>Dashboard</span></a>
+                        <li class="active">
+                            <a href="/wp-admin">
+                                <i class="icon mdi mdi-home"></i><span>Thống kê</span>
+                            </a>
                         </li>
-                        <li class="parent"><a href="#"><i class="icon mdi mdi-face"></i><span>UI
-                                    Elements</span></a>
+                        <li class="parent">
+                            <a href="#">
+                                <i class="icon mdi mdi-inbox"></i><span>Bán hàng tại quầy</span>
+                            </a>
                             <ul class="sub-menu">
-                                <li><a href="ui-alerts.html">Alerts</a>
-                                </li>
-                                <li><a href="ui-buttons.html">Buttons</a>
-                                </li>
-                                <li><a href="ui-cards.html"><span
-                                            class="badge badge-primary float-right">New</span>Cards</a>
-                                </li>
-                                <li><a href="ui-panels.html">Panels</a>
-                                </li>
-                                <li><a href="ui-general.html">General</a>
-                                </li>
-                                <li><a href="ui-modals.html">Modals</a>
-                                </li>
-                                <li><a href="ui-notifications.html">Notifications</a>
-                                </li>
-                                <li><a href="ui-icons.html">Icons</a>
-                                </li>
-                                <li><a href="ui-grid.html">Grid</a>
-                                </li>
                                 <li><a href="ui-tabs-accordions.html">Tabs &amp; Accordions</a>
                                 </li>
                                 <li><a href="ui-nestable-lists.html">Nestable Lists</a>
                                 </li>
-                                <li><a href="ui-typography.html">Typography</a>
-                                </li>
-                                <li><a href="ui-dragdrop.html"><span
-                                            class="badge badge-primary float-right">New</span>Drag &amp;
-                                        Drop</a>
-                                </li>
-                                <li><a href="ui-sweetalert2.html"><span
-                                            class="badge badge-primary float-right">New</span>Sweetalert 2</a>
-                                </li>
                             </ul>
                         </li>
-                        <li class="parent"><a href="charts.html"><i
-                                    class="icon mdi mdi-chart-donut"></i><span>Charts</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="charts-flot.html">Flot</a>
-                                </li>
-                                <li><a href="charts-sparkline.html">Sparklines</a>
-                                </li>
-                                <li><a href="charts-chartjs.html">Chart.js</a>
-                                </li>
-                                <li><a href="charts-morris.html">Morris.js</a>
-                                </li>
-                            </ul>
+                        <li class="parent">
+                            <a href="">
+                                <i class="icon mdi mdi-book"></i><span>Quản lý hóa đơn</span>
+                            </a>
                         </li>
-                        <li class="parent"><a href="#"><i
-                                    class="icon mdi mdi-dot-circle"></i><span>Forms</span></a>
+                        <li class="parent">
+                            <a href="">
+                                <i class="icon mdi mdi-layers"></i><span>Quản lý sản phẩm</span>
+                            </a>
                             <ul class="sub-menu">
-                                <li><a href="form-elements.html">Elements</a>
+                                <li><a href="#">Sản phẩm</a>
                                 </li>
-                                <li><a href="form-validation.html">Validation</a>
+                                <li><a href="{{ route('sole.index') }}">Đế giày</a>
                                 </li>
-                                <li><a href="form-multiselect.html">Multiselect</a>
+                                <li><a href="{{ route('category.index') }}">Loại giày</a>
                                 </li>
-                                <li><a href="form-wizard.html">Wizard</a>
+                                <li><a href="{{ route('material.index') }}">Chất liệu</a>
                                 </li>
-                                <li><a href="form-masks.html">Input Masks</a>
-                                </li>
-                                <li><a href="form-wysiwyg.html">WYSIWYG Editor</a>
-                                </li>
-                                <li><a href="form-upload.html">Multi Upload</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="parent"><a href="#"><i
-                                    class="icon mdi mdi-border-all"></i><span>Tables</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="tables-general.html">General</a>
-                                </li>
-                                <li><a href="tables-datatables.html">Data Tables</a>
-                                </li>
-                                <li><a href="tables-filters.html"><span
-                                            class="badge badge-primary float-right">New</span>Table Filters</a>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="parent"><a href="#"><i
-                                    class="icon mdi mdi-layers"></i><span>Pages</span></a>
-                            <ul class="sub-menu">
-                                <li><a href="pages-blank.html">Blank Page</a>
-                                </li>
-                                <li><a href="pages-blank-header.html">Blank Page Header</a>
-                                </li>
-                                <li><a href="pages-login.html">Login</a>
-                                </li>
-                                <li><a href="pages-login2.html">Login v2</a>
-                                </li>
-                                <li><a href="pages-404.html">404 Page</a>
-                                </li>
-                                <li><a href="pages-sign-up.html">Sign Up</a>
-                                </li>
-                                <li><a href="pages-forgot-password.html">Forgot Password</a>
-                                </li>
-                                <li><a href="pages-profile.html">Profile</a>
-                                </li>
-                                <li><a href="pages-pricing-tables.html">Pricing Tables</a>
-                                </li>
-                                <li><a href="pages-pricing-tables2.html">Pricing Tables v2</a>
-                                </li>
-                                <li><a href="pages-timeline.html">Timeline</a>
-                                </li>
-                                <li><a href="pages-timeline2.html">Timeline v2</a>
-                                </li>
-                                <li><a href="pages-invoice.html"><span
-                                            class="badge badge-primary float-right">New</span>Invoice</a>
-                                </li>
-                                <li><a href="pages-calendar.html">Calendar</a>
-                                </li>
-                                <li><a href="pages-gallery.html">Gallery</a>
-                                </li>
-                                <li><a href="pages-code-editor.html"><span
-                                            class="badge badge-primary float-right">New </span>Code Editor</a>
-                                </li>
-                                <li><a href="pages-booking.html"><span
-                                            class="badge badge-primary float-right">New</span>Booking</a>
-                                </li>
-                                <li><a href="pages-loaders.html"><span
-                                            class="badge badge-primary float-right">New</span>Loaders</a>
-                                </li>
-                                <li><a href="pages-ajax-loader.html"><span
-                                            class="badge badge-primary float-right">New</span>AJAX Loader</a>
+                                <li><a href="{{ route('trademark.index') }}">Thương hiệu</a>
                                 </li>
                             </ul>
                         </li>
                         <li class="divider">Features</li>
-                        <li class="parent"><a href="#"><i
-                                    class="icon mdi mdi-inbox"></i><span>Email</span></a>
+                        <li class="parent">
+                            <a href="#">
+                                <i class="icon mdi mdi-dot-circle"></i><span>Trả hàng</span>
+                            </a>
                             <ul class="sub-menu">
                                 <li><a href="email-inbox.html">Inbox</a>
                                 </li>
@@ -149,8 +57,10 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="parent"><a href="#"><i
-                                    class="icon mdi mdi-view-web"></i><span>Layouts</span></a>
+                        <li class="parent">
+                            <a href="#">
+                                <i class="icon mdi mdi-view-web"></i><span>Giảm giá</span>
+                            </a>
                             <ul class="sub-menu">
                                 <li><a href="layouts-primary-header.html">Primary Header</a>
                                 </li>
@@ -191,8 +101,10 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="parent"><a href="#"><i
-                                    class="icon mdi mdi-pin"></i><span>Maps</span></a>
+                        <li class="parent">
+                            <a href="#">
+                                <i class="icon mdi mdi-face"></i><span>Tài khoản</span>
+                            </a>
                             <ul class="sub-menu">
                                 <li><a href="maps-google.html">Google Maps</a>
                                 </li>
@@ -200,65 +112,8 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="parent"><a href="#"><i class="icon mdi mdi-folder"></i><span>Menu
-                                    Levels</span></a>
-                            <ul class="sub-menu">
-                                <li class="parent"><a href="#"><i
-                                            class="icon mdi mdi-undefined"></i><span>Level 1</span></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="#"><i
-                                                    class="icon mdi mdi-undefined"></i><span>Level 2</span></a>
-                                        </li>
-                                        <li class="parent"><a href="#"><i
-                                                    class="icon mdi mdi-undefined"></i><span>Level 2</span></a>
-                                            <ul class="sub-menu">
-                                                <li><a href="#"><i
-                                                            class="icon mdi mdi-undefined"></i><span>Level
-                                                            3</span></a>
-                                                </li>
-                                                <li><a href="#"><i
-                                                            class="icon mdi mdi-undefined"></i><span>Level
-                                                            3</span></a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="parent"><a href="#"><i
-                                            class="icon mdi mdi-undefined"></i><span>Level 1</span></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="#"><i
-                                                    class="icon mdi mdi-undefined"></i><span>Level 2</span></a>
-                                        </li>
-                                        <li class="parent"><a href="#"><i
-                                                    class="icon mdi mdi-undefined"></i><span>Level 2</span></a>
-                                            <ul class="sub-menu">
-                                                <li><a href="#"><i
-                                                            class="icon mdi mdi-undefined"></i><span>Level
-                                                            3</span></a>
-                                                </li>
-                                                <li><a href="#"><i
-                                                            class="icon mdi mdi-undefined"></i><span>Level
-                                                            3</span></a>
-                                                </li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li><a href="documentation.html"><i
-                                    class="icon mdi mdi-book"></i><span>Documentation</span></a>
-                        </li>
                     </ul>
                 </div>
-            </div>
-        </div>
-        <div class="progress-widget">
-            <div class="progress-data"><span class="progress-value">60%</span><span class="name">Current
-                    Project</span></div>
-            <div class="progress">
-                <div class="progress-bar progress-bar-primary" style="width: 60%;"></div>
             </div>
         </div>
     </div>

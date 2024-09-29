@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Sole extends Model
 {
     use HasFactory;
+    protected $table = "soles";
+    protected $fillable = [
+        'name',
+        'date_create',
+    ];
 }

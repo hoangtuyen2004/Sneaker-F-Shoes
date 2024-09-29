@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('soles', function (Blueprint $table) {
             $table->id();
             $table->string('name',255);//Tên đế giày
-            $table->string('date_create');//Ngày tạo
+            $table->date('date_create');//Ngày tạo
             $table->timestamps();
         });
     }

@@ -25,8 +25,10 @@
         @include('admins.blocks.header-nav')
         {{-- MAIN-SIDEBAR --}}
         @include('admins.blocks.main-sidebar')
-        {{-- CONTENT --}}
-        @yield('content')
+       
+                {{-- CONTENT --}}
+                @yield('content')
+          
         {{-- SIDEBAR --}}
         @include('admins.blocks.right')
     </div>
@@ -46,14 +48,11 @@
     <script src="{{ asset('assets/admins/lib/jquery-ui/jquery-ui.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/admins/lib/jqvmap/jquery.vmap.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/admins/lib/jqvmap/maps/jquery.vmap.world.js') }}" type="text/javascript"></script>
-    <script type="text/javascript">
-        $(document).ready(function() {
-            //-initialize the javascript
-            App.init();
-            App.dashboard();
 
-        });
-    </script>
+    {{-- Bosstrap --}}
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js" integrity="sha384-I7E8VVD/ismYTF4hNIPjVp/Zjvgyol6VFvRkX/vR+Vc4jQkC+hVqc2pM8ODewa9r" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js" integrity="sha384-0pUGZvbkm6XF6gxjEnlmuGrJXVbNuzT9qBBavbLwCsOGabYfZo0T0to5eqruptLy" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     @yield('js')
 </body>
 

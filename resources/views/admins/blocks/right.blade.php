@@ -74,8 +74,7 @@
                     </div>
                     <div class="chat-window">
                         <div class="title">
-                            <div class="user"><img src="{{ asset('assets/admins/img/avatar2.png') }}
-                                " alt="Avatar">
+                            <div class="user"><img src="{{ asset('assets/admins/img/avatar2.png') }} " alt="Avatar">
                                 <h2>Maggie jackson</h2><span>Active 1h ago</span>
                             </div><span class="icon return mdi mdi-chevron-left"></span>
                         </div>
@@ -105,8 +104,7 @@
                         </div>
                         <div class="chat-input">
                             <div class="input-wrapper"><span class="photo mdi mdi-camera"></span>
-                                <input type="text" placeholder="Message..." name="q"
-                                    autocomplete="off"><span class="send-msg mdi mdi-mail-send"></span>
+                                <input type="text" placeholder="Message..." name="q" autocomplete="off"><span class="send-msg mdi mdi-mail-send"></span>
                             </div>
                         </div>
                     </div>
@@ -118,10 +116,8 @@
                                 <div class="todo-content"><span class="category-title">Today</span>
                                     <ul class="todo-list">
                                         <li>
-                                            <div class="custom-checkbox custom-control custom-control-sm"><span
-                                                    class="delete mdi mdi-delete"></span>
-                                                <input class="custom-control-input" type="checkbox"
-                                                    checked="" id="tck1">
+                                            <div class="custom-checkbox custom-control custom-control-sm"><span class="delete mdi mdi-delete"></span>
+                                                <input class="custom-control-input" type="checkbox" checked="" id="tck1">
                                                 <label class="custom-control-label" for="tck1">Initialize
                                                     the project</label>
                                             </div>
@@ -167,8 +163,7 @@
                                         <li>
                                             <div class="custom-checkbox custom-control custom-control-sm"><span
                                                     class="delete mdi mdi-delete"></span>
-                                                <input class="custom-control-input" type="checkbox"
-                                                    id="tck6">
+                                                <input class="custom-control-input" type="checkbox" id="tck6">
                                                 <label class="custom-control-label" for="tck6">Updates
                                                     changes to GitHub </label>
                                             </div>
@@ -178,8 +173,7 @@
                                                     class="delete mdi mdi-delete"></span>
                                                 <input class="custom-control-input" type="checkbox"
                                                     id="tck7">
-                                                <label class="custom-control-label" for="tck7"
-                                                    title="This task is too long to be displayed in a normal space!">This
+                                                <label class="custom-control-label" for="tck7" title="This task is too long to be displayed in a normal space!">This
                                                     task is too long to be displayed in a normal space! </label>
                                             </div>
                                         </li>
