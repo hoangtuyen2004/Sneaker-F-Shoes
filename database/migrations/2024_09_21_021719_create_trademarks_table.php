@@ -15,8 +15,7 @@ return new class extends Migration
         Schema::create('trademarks', function (Blueprint $table) {
             $table->id();
             $table->string('name',255);//Tên thương hiệu
-            $table->date('date_create');//Ngày tạo
-            $table->timestamps();
+            $table->timestamps();//Ngày tạo
         });
     }
 

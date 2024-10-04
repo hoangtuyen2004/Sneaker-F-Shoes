@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255);//Tên màu sắc
             $table->string('color_code',255);//Mã màu
-            $table->timestamps();
+            $table->timestamps();//ngày tạo
         });
     }
 

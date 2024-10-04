@@ -19,7 +19,7 @@ return new class extends Migration
             $table->integer('quanlity');//Số lượng
             $table->float('price',12,2);//Giá
             $table->foreignId('products_id')->constrained('products')->onDelete('cascade');//Mã sản phẩm
-            $table->timestamps();
+            $table->timestamps();//Ngày tạo
         });
     }
 

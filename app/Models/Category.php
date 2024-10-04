@@ -16,6 +16,5 @@ class Category extends Model
     /** */
     protected $fillable = [
         'name',
-        'date_create'
     ];
 }

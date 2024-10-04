@@ -23,12 +23,13 @@ Route::get('wp-admin', function () { return view('admins.dashboards.index');});
 
 //Route resource quản ý người dùng
 Route::resource('user', App\Http\Controllers\admins\UserController::class);
-
-// Route danh mục
+// Route Quản lý sản phẩm
+Route::resource('product', App\Http\Controllers\admins\ProductController::class);
+// Route Quản lý danh mục
 Route::resource('category', App\Http\Controllers\admins\CategoryController::class);
-// Route đế giày
+// Route Quản lý đế giày
 Route::resource('sole',App\Http\Controllers\admins\SoleController::class);
-//Route chất lượng
+// Route Quản lý chất lượng
 Route::resource('material', App\Http\Controllers\admins\MaterialController::class);
-// Route thương hiệu
+// Route Quản lý thương hiệu
 Route::resource('trademark', App\Http\Controllers\admins\TrademarkController::class);

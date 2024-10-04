@@ -22,8 +22,8 @@ return new class extends Migration
             $table->string('district',255);//Quận huyện
             $table->string('commune',255);//Xã
             $table->string('location_detail',255);//Địa chỉ chi tiết
-            $table->boolean('status');
-            $table->timestamps();
+            $table->boolean('status');//Trạng thái
+            $table->timestamps();//Ngày tạo
         });
     }
 

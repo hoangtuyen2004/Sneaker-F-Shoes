@@ -11,6 +11,5 @@ class Material extends Model
     protected $table = "materials";
     protected $fillable = [
         'name',
-        'date_create',
     ];
 }

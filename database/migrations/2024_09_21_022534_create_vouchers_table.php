@@ -26,7 +26,7 @@ return new class extends Migration
             $table->enum('type_code', ['Cá nhân', 'Công khai']);
             $table->enum('status',['Chưa diễn ra', 'Đang diễn ra', 'Đã ngừng', 'Hết hàng']);
             $table->string('description')->nullable();
-            $table->timestamps();
+            $table->timestamps();//Ngày tạo
         });
     }
 

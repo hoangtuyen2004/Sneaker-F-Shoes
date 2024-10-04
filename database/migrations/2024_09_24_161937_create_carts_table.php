@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('users_id')->constrained('users')->onDelete('cascade');//Mã người dùng
             $table->foreignId('attributes_id')->constrained('attributes')->onDelete('cascade');//Mã biến thể
             $table->integer('quanlity');//Số lượng
-            $table->timestamps();
+            $table->timestamps();//Ngày tạo
         });
     }
 

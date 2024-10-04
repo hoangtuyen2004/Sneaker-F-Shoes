@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="{{ asset('assets/clients/css/jquery-ui.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/clients/css/slicknav.min.css') }}" type="text/css">
     <link rel="stylesheet" href="{{ asset('assets/clients/css/style.css') }}" type="text/css">
+    
     {{-- CSS --}}
     @yield('css')
 </head>

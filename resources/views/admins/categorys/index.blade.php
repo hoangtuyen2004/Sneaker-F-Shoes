@@ -30,11 +30,11 @@
                         <div class="icon"><span class="mdi mdi-check"></span></div>
                         <div class="message"><strong>Thông báo!</strong> {{session('success')}}</div>
                     </div>
-                @elseif (session('warring'))
+                @elseif (session('warning'))
                     <div id="warningAlert" class="alert alert-warning alert-dismissible" role="alert">
                         <a class="close" type="button" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-close" aria-hidden="true"></span></a>
                         <div class="icon"><span class="mdi mdi-check"></span></div>
-                        <div class="message"><strong>Thông báo!</strong> {{session('warring')}}</div>
+                        <div class="message"><strong>Thông báo!</strong> {{session('warning')}}</div>
                     </div>
                 @endif
                     @error('name')
@@ -147,7 +147,7 @@
                                             </td>
                                             <td>{{$key+1}}</td>
                                             <td>{{$category->name}}</td>
-                                            <td>{{$category->date_create}}</td>
+                                            <td>{{$category->created_at}}</td>
                                             <td>
                                                 <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Delete{{$category->id}}" type="submit">
                                                     Xóa <i class="mdi mdi-delete"></i>

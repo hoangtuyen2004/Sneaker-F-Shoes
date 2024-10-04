@@ -14,10 +14,10 @@ return new class extends Migration
         //Bảng kho voucher
         Schema::create('voucher_ware', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->constrained('users')->onDelete('cascade');
-            $table->foreignId('vouchers_id')->constrained('vouchers')->onDelete('cascade');
-            $table->enum('status',['Chưa sử dụng', 'Đã sữ dụng']);
-            $table->timestamps();
+            $table->foreignId('users_id')->constrained('users')->onDelete('cascade');//Mã người dùng
+            $table->foreignId('vouchers_id')->constrained('vouchers')->onDelete('cascade');//Mã voucher
+            $table->enum('status',['Chưa sử dụng', 'Đã sữ dụng']);//Trạng thái
+            $table->timestamps();//Ngày tạo
         });
     }
 

@@ -11,6 +11,5 @@ class Trademark extends Model
     protected $table = "trademarks";
     protected $fillable = [
         'name',
-        'date_create',
     ];
 }

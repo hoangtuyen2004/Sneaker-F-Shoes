@@ -11,6 +11,5 @@ class Sole extends Model
     protected $table = "soles";
     protected $fillable = [
         'name',
-        'date_create',
     ];
 }

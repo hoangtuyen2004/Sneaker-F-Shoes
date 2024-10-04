@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('name', 255);//Tên kích cỡ
             $table->string('size_code');//Mã kích cỡ
-            $table->timestamps();
+            $table->timestamps();//ngày tạo
         });
     }
 

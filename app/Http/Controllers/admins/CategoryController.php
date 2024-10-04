@@ -47,8 +47,6 @@ class CategoryController extends Controller
          */
         if($request->isMethod('POST')) {
             $data = $request->only('name');
-            date_default_timezone_set('Asia/Ho_Chi_Minh');
-            $data['date_create'] = date('Y-m-d H:i:s');
             $category_new = Category::query()->create($data);
             return redirect()->route('category.index')->with('success', 'Thêm mới thành công');
         }
@@ -95,7 +93,7 @@ class CategoryController extends Controller
         if($request->isMethod('DELETE')) {
             $category = Category::query()->findOrFail($id);
             $response = $category->delete();
-            return redirect()->route('category.index')->with('warring', 'Xóa thành công');
+            return redirect()->route('category.index')->with('warning', 'Xóa thành công');
         }
     }
 }

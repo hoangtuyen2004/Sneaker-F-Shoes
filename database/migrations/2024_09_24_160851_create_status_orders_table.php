@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('note',255);//Ghi chú
             $table->foreignId('orders_id')->constrained('orders')->onDelete('cascade');//Mã hóa đơn
             $table->foreignId('users_id')->constrained('users')->onDelete('cascade');//Nhân viên xác nhận
-            $table->timestamps();
+            $table->timestamps();//Ngày tạo
         });
     }
 

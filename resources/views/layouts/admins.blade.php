@@ -16,6 +16,8 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admins/lib/jqvmap/jqvmap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admins/lib/datetimepicker/css/bootstrap-datetimepicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admins/css/app.css') }}" type="text/css">
+
+    
     @yield('css')
 </head>
 

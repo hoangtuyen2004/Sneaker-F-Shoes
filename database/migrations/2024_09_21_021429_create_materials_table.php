@@ -15,8 +15,7 @@ return new class extends Migration
         Schema::create('materials', function (Blueprint $table) {
             $table->id();
             $table->string('name',255);//Tên chất liệu
-            $table->date('date_create');//Ngày tạo
-            $table->timestamps();
+            $table->timestamps();//Ngày tạo
         });
     }
 

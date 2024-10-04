@@ -36,8 +36,6 @@ class MaterialController extends Controller
         //
         if($request->isMethod('POST')) {
             $data = $request->only('name');
-            date_default_timezone_set('Asia/Ho_Chi_Minh');
-            $data['date_create'] = date('Y-m-d H:i:s');
             $material_new = Material::query()->create($data);
             return redirect()->route('material.index')->with('success', 'Thêm mới thành công');
         }
@@ -84,7 +82,7 @@ class MaterialController extends Controller
         if($request->isMethod('DELETE')) {
             $material = Material::query()->findOrFail($id);
             $material->delete();
-            return redirect()->route('material.index')->with('warrning','Xóa thành công');
+            return redirect()->route('material.index')->with('warning','Xóa thành công');
         }
     }
 }

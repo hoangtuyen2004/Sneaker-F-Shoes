@@ -35,8 +35,6 @@ class SoleController extends Controller
         //
         if($request->isMethod('POST')) {
             $data = $request->only('name');
-            date_default_timezone_set('Asia/Ho_Chi_Minh');
-            $data['date_create'] = date('Y-m-d H:i:s');   
             $sole_new = Sole::query()->create($data);
             return redirect()->route('sole.index')->with('success', 'Thêm mới thành công');
         }
@@ -81,7 +79,7 @@ class SoleController extends Controller
         if($request->isMethod('DELETE')) {
             $sole = Sole::findOrFail($id);
             $sole->delete();
-            return redirect()->route('sole.index')->with('warring', 'Xóa thành công');
+            return redirect()->route('sole.index')->with('warning', 'Xóa thành công');
         }
     }
 }

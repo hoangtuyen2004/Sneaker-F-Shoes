@@ -5,7 +5,7 @@
                 <div class="left-sidebar-content">
                     <ul class="sidebar-elements">
                         <li class="divider">Menu</li>
-                        <li class="active">
+                        <li class="parent"><!-- active -->
                             <a href="/wp-admin">
                                 <i class="icon mdi mdi-home"></i><span>Thống kê</span>
                             </a>
@@ -31,7 +31,7 @@
                                 <i class="icon mdi mdi-layers"></i><span>Quản lý sản phẩm</span>
                             </a>
                             <ul class="sub-menu">
-                                <li><a href="#">Sản phẩm</a>
+                                <li><a href="{{ route('product.index') }}">Sản phẩm</a>
                                 </li>
                                 <li><a href="{{ route('sole.index') }}">Đế giày</a>
                                 </li>

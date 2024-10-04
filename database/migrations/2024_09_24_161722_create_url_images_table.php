@@ -16,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->string('url',255);//Link ảnh
             $table->foreignId('attributes_id')->constrained('attributes')->onDelete('cascade');//Mã biến thể
-            $table->timestamps();
+            $table->timestamps();//Ngày tạo
         });
     }
 
