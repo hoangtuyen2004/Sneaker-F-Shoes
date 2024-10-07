@@ -19,7 +19,7 @@ return new class extends Migration
             $table->foreignId('soles_id')->constrained('soles')->onDelete('cascade');//Mã đế giày
             $table->foreignId('materials_id')->constrained('materials')->onDelete('cascade');//Mã chất liệu
             $table->foreignId('trademarks_id')->constrained('trademarks')->onDelete('cascade');//Mã thương hiệu
-            $table->string('description')->nullable();//Mô tả sản phẩm
+            $table->string('description',555)->nullable();//Mô tả sản phẩm
             $table->enum('status',['Đang bán', 'Dừng bán']);//Trạng thái
             $table->timestamps();//Ngày tạo
         });

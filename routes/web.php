@@ -33,3 +33,7 @@ Route::resource('sole',App\Http\Controllers\admins\SoleController::class);
 Route::resource('material', App\Http\Controllers\admins\MaterialController::class);
 // Route Quản lý thương hiệu
 Route::resource('trademark', App\Http\Controllers\admins\TrademarkController::class);
+// Route màu sắc;
+Route::resource('color', App\Http\Controllers\admins\ColorController::class);
+// Route size
+Route::resource('size', App\Http\Controllers\admins\SizeController::class);

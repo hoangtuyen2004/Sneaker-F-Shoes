@@ -18,7 +18,7 @@ return new class extends Migration
             $table->foreignId('colors_id')->constrained('colors')->onDelete('cascade');//Mã màu
             $table->integer('quanlity');//Số lượng
             $table->float('price',12,2);//Giá
-            $table->foreignId('products_id')->constrained('products')->onDelete('cascade');//Mã sản phẩm
+            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');//Mã sản phẩm
             $table->timestamps();//Ngày tạo
         });
     }

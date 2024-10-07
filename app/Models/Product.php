@@ -12,12 +12,12 @@ class Product extends Model
     protected $fillable = [
         'name',
         'categorys_id',
-        'soles_id ',
+        'soles_id',
         'materials_id',
         'trademarks_id',
         'description',
         'status',
-    ];
+        ];
     public function categorys()
     {
         return $this->belongsTo(Category::class);
@@ -32,5 +32,9 @@ class Product extends Model
     public function trademarks()
     {
         return $this->belongsTo(Trademark::class);
+    }
+    public function attribute()
+    {
+        return $this->hasMany(Attribute::class);
     }
 }

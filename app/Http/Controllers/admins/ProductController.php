@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ProductRequest;
+use App\Models\Attribute;
 use App\Models\Category;
 use App\Models\Color;
 use App\Models\Material;
@@ -47,6 +49,26 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         //
+        if($request->isMethod('POST')) {
+           
+            $product = $request->only('name','categorys_id','soles_id','materials_id','trademarks_id','description');
+            $product['status'] = "Đang bán";
+            $new_product = Product::query()->create($product);
+            $attributes = $request->input('attributes');
+            foreach ($attributes as $attribute) {
+                $attribute['sizes_id'] = $request[$attribute['size_code']];
+                $attribute['colors_id'] = $request[$attribute['color_code']];
+                $new_attribute = $new_product->attribute()->create($attribute);
+                $files = $request->file('image');
+                foreach ($files as $file) {
+                    foreach ($file as $i) {
+                        $img['url'] = $i->store('uploads/productImg', 'public');
+                        $new_attribute->url_image()->create($img);
+                    }
+                }
+            }
+            return redirect()->route('product.index')->with('success', 'Thêm mới thành công');
+        }
     }
 
     /**
@@ -76,8 +98,13 @@ class ProductController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Request $request, string $id)
     {
         //
+        if($request->isMethod('DELETE')) {
+            $product = Product::query()->findOrFail($id);
+            $product->delete();
+            return redirect()->route('product.index')->with('warning','Xóa thành công sản phẩm '.$product->name);
+        }
     }
 }

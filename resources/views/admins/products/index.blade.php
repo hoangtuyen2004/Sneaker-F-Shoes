@@ -9,6 +9,28 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admins/lib/datatables/datatables.net-bs4/css/dataTables.bootstrap4.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admins/lib/datatables/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admins/css/app.css') }}" type="text/css">
+    <style>
+        .status-success{
+            background-color: #D1E7DD;
+            display: block;
+            border:1px solid #198754;
+            width: 50%;
+            margin: auto;
+            border-radius:14px;
+            padding: 2px 4px;
+            color: #198754;
+        }
+        .status-info{
+            background-color: #CFE2FF;
+            display: block;
+            border:1px solid #0D6EFD;
+            width: 50%;
+            margin: auto;
+            border-radius:14px;
+            padding: 2px 4px;
+            color: #0D6EFD;
+        }
+    </style>
 @endsection
 @section('content')
     {{-- CONTENT --}}
@@ -30,7 +52,7 @@
                         <div class="icon"><span class="mdi mdi-check"></span></div>
                         <div class="message"><strong>Thông báo!</strong> {{session('success')}}</div>
                     </div>
-                @elseif (session('warring'))
+                @elseif (session('warning'))
                     <div id="warningAlert" class="alert alert-warning alert-dismissible" role="alert">
                         <a class="close" type="button" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-close" aria-hidden="true"></span></a>
                         <div class="icon"><span class="mdi mdi-check"></span></div>
@@ -102,6 +124,8 @@
                                         <th>STT</th>
                                         <th>Tên</th>
                                         <th>Ngày thêm</th>
+                                        <th>Số lượng</th>
+                                        <th>Trạng thái</th>
                                         <th>Hành động</th>
                                     </tr>
                                 </thead>
@@ -116,7 +140,13 @@
                                             </td>
                                             <td>{{$key+1}}</td>
                                             <td>{{$product->name}}</td>
-                                            <td>{{$product->date_create}}</td>
+                                            <td>{{$product->created_at}}</td>
+                                            <td>{{$product->attribute->sum('quanlity')}}</td>
+                                            <td>
+                                                <div class="">
+                                                    <div class="{{$product->status == "Đang bán"?"status-success":"status-info"}}">{{$product->status}}</div>
+                                                </div>
+                                            </td>
                                             <td>
                                                 <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#Delete{{$product->id}}" type="submit">
                                                     Xóa <i class="mdi mdi-delete"></i>

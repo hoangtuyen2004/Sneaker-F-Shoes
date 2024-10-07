@@ -8,4 +8,22 @@ use Illuminate\Database\Eloquent\Model;
 class Attribute extends Model
 {
     use HasFactory;
+
+    protected $table = "attributes";
+    protected $fillable = [
+        'sizes_id',
+        'colors_id',
+        'quanlity',
+        'weight',
+        'price',
+        'product_id',
+    ];
+    public function product()
+    {
+        return $this->belongsTo(Product::class);
+    }
+    public function url_image()
+    {
+        return $this->hasMany(Url_image::class);
+    }
 }
