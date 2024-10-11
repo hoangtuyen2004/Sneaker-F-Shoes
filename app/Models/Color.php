@@ -13,4 +13,8 @@ class Color extends Model
         'name',
         'color_code',
     ];
+    public function attribute()
+    {
+        return $this->hasMany(Attribute::class);
+    }
 }

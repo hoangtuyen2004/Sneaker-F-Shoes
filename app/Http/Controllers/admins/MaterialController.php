@@ -37,7 +37,7 @@ class MaterialController extends Controller
         if($request->isMethod('POST')) {
             $data = $request->only('name');
             $material_new = Material::query()->create($data);
-            return redirect()->route('material.index')->with('success', 'Thêm mới thành công');
+            return back()->with('success', 'Thêm mới chất liệu thành công');
         }
     }
 
@@ -69,7 +69,7 @@ class MaterialController extends Controller
             $data = $request->only('name');
             $material = Material::query()->findOrFail($id);
             $material->update($data);
-            return redirect()->route('material.index')->with('success', 'Sửa thành công');
+            return redirect()->route('material.index')->with('success', 'Sửa chất liệu thành công');
         }
     }
 
@@ -82,7 +82,7 @@ class MaterialController extends Controller
         if($request->isMethod('DELETE')) {
             $material = Material::query()->findOrFail($id);
             $material->delete();
-            return redirect()->route('material.index')->with('warning','Xóa thành công');
+            return redirect()->route('material.index')->with('warning','Xóa chất liệu thành công');
         }
     }
 }

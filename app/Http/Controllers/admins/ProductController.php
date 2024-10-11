@@ -46,7 +46,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         //
         if($request->isMethod('POST')) {
@@ -77,6 +77,11 @@ class ProductController extends Controller
     public function show(string $id)
     {
         //
+        $data['product'] = Product::findOrFail($id);
+        $data['attributes'] = $data['product']->attribute()->get();
+        $data['colors'] = Color::query()->get();
+        $data['sizes'] = Size::query()->get();
+        return view('admins.products.detail',$data);
     }
 
     /**
@@ -85,6 +90,14 @@ class ProductController extends Controller
     public function edit(string $id)
     {
         //
+        $data['product'] = Product::findOrFail($id);
+        $data['colors'] = Color::all();
+        $data['sizes'] = Size::all();
+        $data['categorys'] = Category::all();
+        $data['soles'] = Sole::all();
+        $data['materials'] = Material::all();
+        $data['trademarks'] = Trademark::all();
+        return view('admins.products.edit',$data);
     }
 
     /**
@@ -93,6 +106,18 @@ class ProductController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        if($request->isMethod('PUT')) {
+            $data['product'] = $request->only('name','categorys_id','soles_id','materials_id','trademarks_id','description');
+            $data['attributes'] = $request->input('attribute');
+
+            $product = Product::query()->findOrFail($id);
+            $product->update($data['product']);
+            foreach ($data['attributes'] as $attribute) {
+                $attribute_update = Attribute::query()->findOrFail($attribute['id']);
+                $attribute_update->update($attribute);
+            }
+            return redirect()->route('product.index')->with('success', 'Sửa sản phẩm thành công');
+        }
     }
 
     /**

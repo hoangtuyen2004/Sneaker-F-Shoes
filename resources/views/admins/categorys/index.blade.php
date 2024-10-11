@@ -37,7 +37,7 @@
                         <div class="message"><strong>Thông báo!</strong> {{session('warning')}}</div>
                     </div>
                 @endif
-                    @error('name')
+                @error('name')
                     <div id="warningAlert" class="alert alert-danger alert-dismissible" role="alert">
                         <a class="close" type="button" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-close" aria-hidden="true"></span></a>
                         <div class="icon"><span class="mdi mdi-check"></span></div>
@@ -291,5 +291,13 @@
                     Item = labelAll;
                 });
             })
+        </script>
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const alert = document.querySelector('.alert');
+                alert.style.display = "none";
+            }, 5000);
+            });
         </script>
 @endsection

@@ -36,7 +36,7 @@ class SoleController extends Controller
         if($request->isMethod('POST')) {
             $data = $request->only('name');
             $sole_new = Sole::query()->create($data);
-            return redirect()->route('sole.index')->with('success', 'Thêm mới thành công');
+            return back()->with('success', 'Thêm mới đế giày thành công');
         }
     }
 
@@ -66,7 +66,7 @@ class SoleController extends Controller
             $data = $request->only('name');
             $sole = Sole::findOrFail($id);
             $sole->update($data);
-            return redirect()->route('sole.index')->with('success', 'Sửa thành công');
+            return redirect()->route('sole.index')->with('success', 'Sửa đế giày thành công thành công');
         }
     }
 
@@ -79,7 +79,7 @@ class SoleController extends Controller
         if($request->isMethod('DELETE')) {
             $sole = Sole::findOrFail($id);
             $sole->delete();
-            return redirect()->route('sole.index')->with('warning', 'Xóa thành công');
+            return redirect()->route('sole.index')->with('warning', 'Xóa đế giày thành công thành công');
         }
     }
 }

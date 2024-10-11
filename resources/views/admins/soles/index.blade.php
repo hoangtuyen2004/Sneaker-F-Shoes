@@ -291,4 +291,12 @@
                 });
             })
         </script>
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const alert = document.querySelector('.alert');
+                alert.style.display = "none";
+            }, 5000);
+            });
+        </script>
 @endsection

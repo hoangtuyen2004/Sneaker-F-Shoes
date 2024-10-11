@@ -56,7 +56,7 @@
                     <div id="warningAlert" class="alert alert-warning alert-dismissible" role="alert">
                         <a class="close" type="button" data-dismiss="alert" aria-label="Close"><span class="mdi mdi-close" aria-hidden="true"></span></a>
                         <div class="icon"><span class="mdi mdi-check"></span></div>
-                        <div class="message"><strong>Thông báo!</strong> {{session('warring')}}</div>
+                        <div class="message"><strong>Thông báo!</strong> {{session('warning')}}</div>
                     </div>
                 @endif
                 @error('name')
@@ -178,9 +178,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <button class="btn btn-warning">
+                                                <a href="{{ route('product.edit',$product->id) }}" class="btn btn-warning">
                                                     Sửa <span class="icon mdi mdi-edit"></span>
-                                                </button>
+                                                </a>
+                                                <a href="{{ route('product.show',$product->id) }}" class="btn btn-info">Chi tiết <i class="icon mdi mdi-eye"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -266,5 +267,14 @@
                     Item = labelAll;
                 });
             })
+        </script>
+    {{-- Tắt thông báo --}}
+        <script>
+            window.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                const alert = document.querySelector('.alert');
+                alert.style.display = "none";
+            }, 5000);
+            });
         </script>
 @endsection

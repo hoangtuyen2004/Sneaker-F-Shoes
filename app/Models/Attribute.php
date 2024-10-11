@@ -26,4 +26,12 @@ class Attribute extends Model
     {
         return $this->hasMany(Url_image::class);
     }
+    public function colors()
+    {
+        return $this->belongsTo(Color::class);
+    }
+    public function sizes()
+    {
+        return $this->belongsTo(Size::class);
+    }
 }

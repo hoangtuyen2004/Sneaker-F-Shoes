@@ -13,4 +13,8 @@ class Size extends Model
         'name',
         'size_code',
     ];
+    public function attribute()
+    {
+        return $this->hasMany(Attribute::class);
+    }
 }

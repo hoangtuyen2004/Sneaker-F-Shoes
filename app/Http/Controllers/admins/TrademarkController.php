@@ -39,7 +39,7 @@ class TrademarkController extends Controller
             // date_default_timezone_set('Asia/Ho_Chi_Minh');
             // $data['date_create'] = date('Y-m-d H:i:s');
             $trademark_new = Trademark::query()->create($data);
-            return redirect()->route('trademark.index')->with('success', 'Thêm mới thành công');
+            return back()->with('success', 'Thêm mới thương hiệu thành công');
         }
     }
 
@@ -69,7 +69,7 @@ class TrademarkController extends Controller
             $data = $request->only('name');
             $trademark = Trademark::query()->findOrFail($id);
             $trademark->update($data);
-            return redirect()->route('trademark.index')->with('success', 'Sửa thành công');
+            return redirect()->route('trademark.index')->with('success', 'Sửa thương hiệu thành công');
         }
     }
 
@@ -82,7 +82,7 @@ class TrademarkController extends Controller
         if($request->isMethod('DELETE')) {
             $trademark = Trademark::query()->findOrFail($id);
             $trademark->delete();
-            return redirect()->route('trademark.index')->with('warning', 'Xóa thành công');
+            return redirect()->route('trademark.index')->with('warning', 'Xóa thương hiệu thành công');
         }
     }
 }

@@ -11,7 +11,7 @@ class Url_image extends Model
     protected $table = "url_images";
     protected $fillable = [
         'url',
-        'attributes_id',
+        'attribute_id',
     ];
     public function attribute()
     {

@@ -15,7 +15,7 @@ return new class extends Migration
         Schema::create('url_images', function (Blueprint $table) {
             $table->id();
             $table->string('url',255);//Link ảnh
-            $table->foreignId('attributes_id')->constrained('attributes')->onDelete('cascade');//Mã biến thể
+            $table->foreignId('attribute_id')->constrained('attributes')->onDelete('cascade');//Mã biến thể
             $table->timestamps();//Ngày tạo
         });
     }

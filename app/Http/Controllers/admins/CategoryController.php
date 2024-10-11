@@ -48,7 +48,7 @@ class CategoryController extends Controller
         if($request->isMethod('POST')) {
             $data = $request->only('name');
             $category_new = Category::query()->create($data);
-            return redirect()->route('category.index')->with('success', 'Thêm mới thành công');
+            return back()->with('success', 'Thêm mới loại giày thành công');
         }
     }
 
@@ -80,7 +80,7 @@ class CategoryController extends Controller
             $category = Category::findOrFail($id);
             $params = $request->only('name');
             $category->update($params);
-            return redirect()->route('category.index')->with('success',"Sửa thành công");
+            return redirect()->route('category.index')->with('success',"Sửa loại giày thành công");
         }
     }
 
@@ -93,7 +93,7 @@ class CategoryController extends Controller
         if($request->isMethod('DELETE')) {
             $category = Category::query()->findOrFail($id);
             $response = $category->delete();
-            return redirect()->route('category.index')->with('warning', 'Xóa thành công');
+            return redirect()->route('category.index')->with('warning', 'Xóa loại giày thành công');
         }
     }
 }
