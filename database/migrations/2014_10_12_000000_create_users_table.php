@@ -14,10 +14,10 @@ return new class extends Migration
         //Bảng người dùng
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('user_code',10);//Mã khách hàng
+            $table->string('user_code',10)->unique();//Mã khách hàng
             $table->string('name',255);//Họ tên
             $table->string('email',255)->unique();//Email
-            $table->date('birthday');//Ngày sinh
+            $table->date('birthday')->nullable();//Ngày sinh
             $table->string('phone_number',20);//Số điện thoại
             $table->enum('gender', ['Nam', 'Nữ', 'Khác']);//Giới tính
             $table->string('image')->nullable();//Ảnh

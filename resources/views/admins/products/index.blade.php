@@ -77,7 +77,7 @@
                                 <div>Danh sách</div>
                                 <div>
                                     {{-- Thêm mới --}}
-                                    <a href="{{ route('product.create') }}">
+                                    <a href="{{ route('wp-admin.product.create') }}">
                                         <button id="btnAdd" type="button" class="btn btn-space btn-outline-success">
                                             Thêm mới <span class="icon mdi mdi-plus-circle"></span>
                                         </button>
@@ -154,7 +154,7 @@
                                                 <div class="modal" id="Delete{{$product->id}}">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
-                                                            <form action="{{ route('product.destroy',$product->id) }}" method="POST">
+                                                            <form action="{{ route('wp-admin.product.destroy',$product->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <div class="modal-header d-block">
@@ -178,10 +178,10 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <a href="{{ route('product.edit',$product->id) }}" class="btn btn-warning">
+                                                <a href="{{ route('wp-admin.product.edit',$product->id) }}" class="btn btn-warning">
                                                     Sửa <span class="icon mdi mdi-edit"></span>
                                                 </a>
-                                                <a href="{{ route('product.show',$product->id) }}" class="btn btn-info">Chi tiết <i class="icon mdi mdi-eye"></i></a>
+                                                <a href="{{ route('wp-admin.product.show',$product->id) }}" class="btn btn-info">Chi tiết <i class="icon mdi mdi-eye"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -232,7 +232,7 @@
                     // event.preventDefault();
                     // var formData = $(this).serialize(); // Chuyển dữ liệu form thành chuỗi
                     // $.ajax({
-                    //     url: "{{ route('product.store') }}", // Đường dẫn đến file xử lý dữ liệu trên server
+                    //     url: "{{ route('wp-admin.product.store') }}", // Đường dẫn đến file xử lý dữ liệu trên server
                     //     type: 'POST',
                     //     data: $(this).serialize(),
                     //     success: function(response) {

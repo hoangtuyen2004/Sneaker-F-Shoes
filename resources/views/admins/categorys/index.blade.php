@@ -61,7 +61,7 @@
                                     <div class="modal" id="myModal">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                                <form action="{{ route('category.store') }}" id="FormLoad" method="post">
+                                                <form action="{{ route('wp-admin.category.store') }}" id="FormLoad" method="post">
                                                     @csrf
                                                     <!-- Modal Header -->
                                                     <div class="modal-header d-block">
@@ -155,7 +155,7 @@
                                                 <div class="modal" id="Delete{{$category->id}}">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
-                                                            <form action="{{ route('category.destroy',$category->id) }}" method="POST">
+                                                            <form action="{{ route('wp-admin.category.destroy',$category->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <div class="modal-header d-block">
@@ -185,7 +185,7 @@
                                                 <div class="modal text-left" id="Modal{{$category->id}}">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
-                                                            <form action="{{ route('category.update',$category->id) }}" method="post">
+                                                            <form action="{{ route('wp-admin.category.update',$category->id) }}" method="post">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="modal-header d-block">
@@ -256,7 +256,7 @@
                     // event.preventDefault();
                     // var formData = $(this).serialize(); // Chuyển dữ liệu form thành chuỗi
                     // $.ajax({
-                    //     url: "{{ route('category.store') }}", // Đường dẫn đến file xử lý dữ liệu trên server
+                    //     url: "{{ route('wp-admin.category.store') }}", // Đường dẫn đến file xử lý dữ liệu trên server
                     //     type: 'POST',
                     //     data: $(this).serialize(),
                     //     success: function(response) {

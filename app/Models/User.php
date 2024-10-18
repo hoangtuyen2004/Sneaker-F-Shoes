@@ -18,9 +18,16 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'user_code',
         'name',
         'email',
+        'birthday',
+        'phone_number',
+        'gender',
+        'image',
         'password',
+        'status',
+        'role',
     ];
 
     /**
@@ -41,4 +48,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function location() {
+        return $this->hasMany(Location::class);
+    }
 }

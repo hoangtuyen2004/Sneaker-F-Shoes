@@ -96,7 +96,7 @@
             </div>
         </div>
         <div class="main-content container-fluid">
-            <form action="{{ route('product.store') }}" enctype="multipart/form-data" method="post">
+            <form action="{{ route('wp-admin.product.store') }}" enctype="multipart/form-data" method="post">
                 @csrf
                 <div class="row">{{---Sản phẩm---}}
                     <div class="col-md-12">
@@ -351,7 +351,7 @@
             </form>
         </div>
     </div>
-    <form action="{{ route('color.store') }}" method="post" class="modal" id="Color_add">
+    <form action="{{ route('wp-admin.color.store') }}" method="post" class="modal" id="Color_add">
         @csrf
         <div class="modal-dialog">
             <div class="modal-content">
@@ -381,7 +381,7 @@
             </div>
         </div>
     </form>
-    <form action="{{ route('size.store') }}" method="post" class="modal" id="Size_add">
+    <form action="{{ route('wp-admin.size.store') }}" method="post" class="modal" id="Size_add">
         @csrf
         <div class="modal-dialog">
             <div class="modal-content">

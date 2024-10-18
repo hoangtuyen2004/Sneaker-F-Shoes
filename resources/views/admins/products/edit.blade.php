@@ -176,7 +176,7 @@
             </div>
         </div>
         <div class="main-content container-fluid">
-            <form action="{{ route('product.update', $product->id) }}" enctype="multipart/form-data" method="post">
+            <form action="{{ route('wp-admin.product.update', $product->id) }}" enctype="multipart/form-data" method="post">
                 @csrf
                 @method('PUT')
                 <div class="row">
@@ -427,7 +427,7 @@
                                         </div>
                                         <div class="card-body">
                                             <div class="" style="text-align: end;">
-                                                <a href="{{ route('product.show',$product->id) }}" class="btn btn-space btn-outline-primary btn-space w-25">Xem <i class="icon mdi mdi-eye"></i></a>
+                                                <a href="{{ route('wp-admin.product.show',$product->id) }}" class="btn btn-space btn-outline-primary btn-space w-25">Xem <i class="icon mdi mdi-eye"></i></a>
                                             </div>
                                             <div>
                                                 <p class="text-secondary"><i class="icon pr-3 mdi mdi-my-location"></i>
@@ -450,7 +450,7 @@
                                         </div>
                                         <div style="border-top: 1px solid #dcdcde;background-color: #F6F7F7;">
                                             <div id="action" class="card-footer" style="background: none;">
-                                                <div><a class="d-block mb-1" id="back" href="{{ route('product.index') }}">Hủy thay
+                                                <div><a class="d-block mb-1" id="back" href="{{ route('wp-admin.product.index') }}">Hủy thay
                                                         đổi</a></div>
                                                 <div id="DU">
                                                     <div><a class="d-block mb-1" id="delete" href="">Xóa sản

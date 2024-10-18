@@ -14,7 +14,7 @@ return new class extends Migration
         // 
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('users_id')->nullable()->constrained('users')->onDelete('cascade');//Mã khách hàng
+            $table->foreignId('user_id')->nullable()->constrained('users')->onDelete('cascade');//Mã khách hàng
             $table->string('location_name',255);//Tên địa chỉ
             $table->string('user_name', 255);//Tên người nhận
             $table->string('phone_number',20);//Số điện thoại

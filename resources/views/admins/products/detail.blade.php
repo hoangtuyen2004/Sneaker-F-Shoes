@@ -174,7 +174,7 @@
                         <div class="card card-contrast">
                             <div class="card-header px-3 py-1 card-header-contrast card-header-featured" style="background-color: #FECBA1 !important;">
                                 <div class="d-flex" style="gap: 10px">
-                                    <a href="{{route('product.index')}}" class="btn btn-center btn-space btn-secondary btn-xs m-0">
+                                    <a href="{{route('wp-admin.product.index')}}" class="btn btn-center btn-space btn-secondary btn-xs m-0">
                                         <i class="icon mdi mdi-arrow-left"></i> Quay lại
                                     </a>
                                     <form action="" class="input-group" method="GET" style="width: 10%;">
@@ -184,7 +184,7 @@
                                             <i class="icon mdi mdi-refresh"></i>
                                         </button>
                                     </form>
-                                    <a href="{{route('product.edit',$product->id)}}" class="btn btn-center btn-space btn-info btn-xs m-0">
+                                    <a href="{{route('wp-admin.product.edit',$product->id)}}" class="btn btn-center btn-space btn-info btn-xs m-0">
                                         <i class="icon mdi mdi-edit"></i> Sửa sản phẩm
                                     </a>
                                     @if ($product->status == "Đang bán")

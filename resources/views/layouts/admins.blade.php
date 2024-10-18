@@ -16,7 +16,16 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admins/lib/jqvmap/jqvmap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{ asset('assets/admins/lib/datetimepicker/css/bootstrap-datetimepicker.min.css') }}">
     <link rel="stylesheet" href="{{ asset('assets/admins/css/app.css') }}" type="text/css">
-
+    <style>
+        #logout {
+            width: 100% !important;
+            text-align: start !important;
+            box-shadow: none !important;
+            font-weight: normal !important;
+            color: #504e4e;
+            line-height: 18px;
+        }
+    </style>
     
     @yield('css')
 </head>

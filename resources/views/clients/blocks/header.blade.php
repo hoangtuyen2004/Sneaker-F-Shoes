@@ -11,16 +11,17 @@
             </div>
         </div>
         <div class="ht-right">
-            <a href="#" class="login-panel"><i class="fa fa-user"></i>Login</a>
-            <div class="lan-selector">
-                <select class="language_drop" name="countries" id="countries" style="width:300px;">
-                    <option value='yt' data-image="{{ asset('assets/clients/img/flag-1.jpg') }}" data-imagecss="flag yt" data-title="English">
-                        English</option>
-                    <option value='yu' data-image="{{ asset('assets/clients/img/flag-2.jpg') }}" data-imagecss="flag yu" data-title="Bangladesh">
-                        German </option>
-                </select>
-            </div>
-            <div class="top-social">
+            @if (Auth::user())
+                <div class="login-panel d-flex"><a href="" class="text-dark"><i class="fa fa-user"></i> {{Auth::user()->name}}</a>
+                    <form action="{{ route('logout') }}" method="POST">
+                        @csrf
+                        <button type="submit" class="btn m-0 p-0">|Out</button>
+                    </form>
+                </div>
+            @else
+                <a href="{{ route('login') }}" class="login-panel"><i class="fa fa-user"></i>Đăng nhập</a>
+            @endif
+            <div class="top-social" style="border-right: none;">
                 <a href="#"><i class="ti-facebook"></i></a>
                 <a href="#"><i class="ti-twitter-alt"></i></a>
                 <a href="#"><i class="ti-linkedin"></i></a>

@@ -61,7 +61,7 @@
                                     <div class="modal" id="myModal">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                                <form action="{{ route('trademark.store') }}" id="FormLoad" method="post">
+                                                <form action="{{ route('wp-admin.trademark.store') }}" id="FormLoad" method="post">
                                                     @csrf
                                                     <!-- Modal Header -->
                                                     <div class="modal-header d-block">
@@ -155,7 +155,7 @@
                                                 <div class="modal" id="Delete{{$trademark->id}}">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
-                                                            <form action="{{ route('trademark.destroy',$trademark->id) }}" method="POST">
+                                                            <form action="{{ route('wp-admin.trademark.destroy',$trademark->id) }}" method="POST">
                                                                 @csrf
                                                                 @method('DELETE')
                                                                 <div class="modal-header d-block">
@@ -185,7 +185,7 @@
                                                 <div class="modal text-left" id="Modal{{$trademark->id}}">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
-                                                            <form action="{{ route('trademark.update',$trademark->id) }}" method="post">
+                                                            <form action="{{ route('wp-admin.trademark.update',$trademark->id) }}" method="post">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="modal-header d-block">
@@ -256,7 +256,7 @@
                     // event.preventDefault();
                     // var formData = $(this).serialize(); // Chuyển dữ liệu form thành chuỗi
                     // $.ajax({
-                    //     url: "{{ route('trademark.store') }}", // Đường dẫn đến file xử lý dữ liệu trên server
+                    //     url: "{{ route('wp-admin.trademark.store') }}", // Đường dẫn đến file xử lý dữ liệu trên server
                     //     type: 'POST',
                     //     data: $(this).serialize(),
                     //     success: function(response) {

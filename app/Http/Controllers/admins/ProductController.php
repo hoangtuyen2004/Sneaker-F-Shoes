@@ -24,7 +24,7 @@ class ProductController extends Controller
         /**
          * 
          */
-        $data['products'] = Product::query()->with(['categorys','soles', 'materials', 'trademarks'])->get();
+        $data['products'] = Product::query()->with(['categorys','soles', 'materials', 'trademarks'])->orderBy('id','desc')->paginate(10);
         return view('admins.products.index', $data);
     }
 

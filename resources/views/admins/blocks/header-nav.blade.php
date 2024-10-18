@@ -13,16 +13,33 @@
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" role="button" aria-expanded="false">
                         <img src="{{ asset('assets/admins/img/avatar.png') }}" alt="Avatar">
-                        <span class="user-name">Túpac Amaru</span>
+                        <span class="user-name">{{Auth::user()->name}}</span>
                     </a>
                     <div class="dropdown-menu" role="menu">
-                        <div class="user-info">
-                            <div class="user-name">Túpac Amaru</div>
-                            <div class="user-position online">Available</div>
+                        <div class="user-info user-role">
+                            @if (Auth::user()->role === "Quản lý")
+                                <style>
+                                    .be-top-header .be-user-nav>li.dropdown .dropdown-menu:after {
+                                        left: auto;
+                                        right: 13px;
+                                        border-bottom-color: #ea4335 !important;
+                                    }
+                                    .user-role {
+                                        background-color: #ea4335 !important;
+                                    }
+                                </style>
+                            @endif
+                            <div class="user-name">{{Auth::user()->name}}</div>
+                            <div class="user-position online">{{Auth::user()->role}}</div>
                         </div>
-                        <a class="dropdown-item" href="pages-profile.html"><span class="icon mdi mdi-face"></span>Account</a>
-                                <a class="dropdown-item" href="#"><span class="icon mdi mdi-settings"></span>Settings</a>
-                                <a class="dropdown-item" href="pages-login.html"><span class="icon mdi mdi-power"></span>Logout</a>
+                        <a class="dropdown-item" href="pages-profile.html"><span class="icon mdi mdi-face"></span>Tài khoản</a>
+                                <a class="dropdown-item" href="#"><span class="icon mdi mdi-settings"></span>Cài đặt</a>
+                                <a class="dropdown-item" href="">
+                                    <form class="p-0 m-0" method="POST" action="{{ route('logout') }}">
+                                        @csrf
+                                        <button id="logout" class="btn p-0 m-0"><span class="icon mdi mdi-power"></span>Đăng xuất </button>
+                                    </form>    
+                                </a>
                     </div>
                 </li>
             </ul>

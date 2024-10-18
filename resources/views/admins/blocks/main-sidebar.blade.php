@@ -31,15 +31,15 @@
                                 <i class="icon mdi mdi-layers"></i><span>Quản lý sản phẩm</span>
                             </a>
                             <ul class="sub-menu">
-                                <li><a href="{{ route('product.index') }}">Sản phẩm</a>
+                                <li><a href="{{ route('wp-admin.product.index') }}">Sản phẩm</a>
                                 </li>
-                                <li><a href="{{ route('sole.index') }}">Đế giày</a>
+                                <li><a href="{{ route('wp-admin.sole.index') }}">Đế giày</a>
                                 </li>
-                                <li><a href="{{ route('category.index') }}">Loại giày</a>
+                                <li><a href="{{ route('wp-admin.category.index') }}">Loại giày</a>
                                 </li>
-                                <li><a href="{{ route('material.index') }}">Chất liệu</a>
+                                <li><a href="{{ route('wp-admin.material.index') }}">Chất liệu</a>
                                 </li>
-                                <li><a href="{{ route('trademark.index') }}">Thương hiệu</a>
+                                <li><a href="{{ route('wp-admin.trademark.index') }}">Thương hiệu</a>
                                 </li>
                             </ul>
                         </li>
@@ -106,9 +106,9 @@
                                 <i class="icon mdi mdi-face"></i><span>Tài khoản</span>
                             </a>
                             <ul class="sub-menu">
-                                <li><a href="maps-google.html">Google Maps</a>
+                                <li><a href="maps-google.html">Quản lý nhân viên</a>
                                 </li>
-                                <li><a href="maps-vector.html">Vector Maps</a>
+                                <li><a href="{{ route('wp-admin.user.index') }}">Quản lý khách hàng</a>
                                 </li>
                             </ul>
                         </li>
