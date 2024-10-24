@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('image')->nullable();//Ảnh
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');//Mật khẩu
-            $table->enum('status',['Hoạt động', 'Đã khóa', 'Xóa']);//Trạng thái tài khoản
+            $table->enum('status',['Hoạt động', 'Không hoạt động', 'Đã khóa', 'Xóa']);//Trạng thái tài khoản
             $table->enum('role', ['Khách hàng', 'Nhân viên', 'Quản lý']);//Chức vụ
             $table->rememberToken();
             $table->timestamps();

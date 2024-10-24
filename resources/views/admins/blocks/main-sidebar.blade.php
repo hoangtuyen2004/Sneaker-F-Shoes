@@ -106,7 +106,7 @@
                                 <i class="icon mdi mdi-face"></i><span>Tài khoản</span>
                             </a>
                             <ul class="sub-menu">
-                                <li><a href="maps-google.html">Quản lý nhân viên</a>
+                                <li><a href="{{ route('wp-admin.member.index') }}">Quản lý nhân viên</a>
                                 </li>
                                 <li><a href="{{ route('wp-admin.user.index') }}">Quản lý khách hàng</a>
                                 </li>

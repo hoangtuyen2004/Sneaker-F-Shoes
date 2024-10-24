@@ -41,11 +41,11 @@
     <div class="be-content">
         <div class="row">
             <div class="page-head col">
-                <h2 class="page-head-title">Người dùng</h2>
+                <h2 class="page-head-title">Nhân viên</h2>
                 <nav aria-label="breadcrumb" role="navigation">
                     <ol class="breadcrumb page-head-nav">
                         <li class="breadcrumb-item"><a href="#">Quản lý tài khoản</a></li>
-                        <li class="breadcrumb-item active">Người dùng</li>
+                        <li class="breadcrumb-item active">Nhân viên</li>
                     </ol>
                 </nav>
             </div>
@@ -81,7 +81,7 @@
                                 <div>Danh sách</div>
                                 <div>
                                     {{-- Thêm mới --}}
-                                    <a id="btnAdd" href="{{route('wp-admin.user.create')}}" class="btn btn-space btn-outline-success">
+                                    <a id="btnAdd" href="{{route('wp-admin.member.create')}}" class="btn btn-space btn-outline-success">
                                         Thêm mới <span class="icon mdi mdi-plus-circle"></span>
                                     </a>
                                     <a class="btn btn-space btn-outline-info" href="">Export excel
@@ -103,28 +103,28 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($users as $key=>$user)
+                                    @foreach ($members as $key=>$member)
                                         <tr class="odd gradeX">
                                             <td>{{$key+1}}</td>
                                             <td class="user-avatar cell-detail user-info" style="text-align: start;">
-                                                @if ($user->image != null)
-                                                    <img style="object-fit: cover;" src="{{ Storage::url($user->image) }}" alt="avatar">
+                                                @if ($member->image != null)
+                                                    <img style="object-fit: cover;" src="{{ Storage::url($member->image) }}" alt="avatar">
                                                 @else
                                                     <img style="object-fit: cover;" src="{{ asset('assets/admins/img/avatar.png') }}" alt="avatar">
                                                 @endif
-                                                <span>{{$user->name}}</span>
-                                                <span class="cell-detail-description user text-success">{{$user->role}}</span>
+                                                <span>{{$member->name}}</span>
+                                                <span class="cell-detail-description user {{$member->role == 'Quản lý' ? 'text-danger' : 'text-info'}}">{{$member->role}}</span>
                                             </td>
-                                            <td>{{$user->user_code}}</td>
-                                            <td><span class="">{{$user->email}}</span></td>
-                                            <td>{{$user->phone_number}}</td>
+                                            <td>{{$member->user_code}}</td>
+                                            <td><span class="">{{$member->email}}</span></td>
+                                            <td>{{$member->phone_number}}</td>
                                             <td>
-                                                <span class="@if($user->status == 'Hoạt động') text-success ts @elseif($user->status == 'Đã khóa') text-secondary tc @else text-danger td @endif">
-                                                    {{$user->status}}
+                                                <span class="@if($member->status == 'Hoạt động') text-success ts @elseif($member->status == 'Đã khóa') text-secondary tc @else text-danger td @endif">
+                                                    {{$member->status}}
                                                 </span>
                                             </td>
                                             <td>
-                                                <a class="btn btn-info" href="{{ route('wp-admin.user.show',$user->id) }}">Chi tiết <i class="icon mdi mdi-eye"></i></a>
+                                                <a class="btn btn-info" href="{{ route('wp-admin.member.show',$member->id) }}">Chi tiết <i class="icon mdi mdi-eye"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -176,6 +176,5 @@
                 alert.style.display = "none";
             }, 5000);
             });
-            sessionStorage.clear();
         </script>
 @endsection

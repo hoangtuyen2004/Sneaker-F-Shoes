@@ -58,6 +58,7 @@ class CategoryController extends Controller
     public function show(string $id)
     {
         //
+        abort(404);
     }
 
     /**
@@ -66,6 +67,7 @@ class CategoryController extends Controller
     public function edit(string $id)
     {
         //
+        abort(404);
     }
 
     /**
@@ -80,7 +82,7 @@ class CategoryController extends Controller
             $category = Category::findOrFail($id);
             $params = $request->only('name');
             $category->update($params);
-            return redirect()->route('category.index')->with('success',"Sửa loại giày thành công");
+            return back()->with('success',"Sửa loại giày thành công");
         }
     }
 
@@ -93,7 +95,7 @@ class CategoryController extends Controller
         if($request->isMethod('DELETE')) {
             $category = Category::query()->findOrFail($id);
             $response = $category->delete();
-            return redirect()->route('category.index')->with('warning', 'Xóa loại giày thành công');
+            return back()->with('warning', 'Xóa loại giày thành công');
         }
     }
 }

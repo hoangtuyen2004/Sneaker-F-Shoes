@@ -34,6 +34,7 @@ Route::prefix('wp-admin')->as('wp-admin.')->middleware(CheckRoleAdminMiddleware:
 
     // Route resource quản lý người dùng
     Route::resource('user', App\Http\Controllers\admins\UserController::class);
+    Route::resource('member', App\Http\Controllers\admins\MemberController::class);
     // Route location
     Route::put('location/{id}/update', [App\Http\Controllers\admins\LocationController::class,'update'])->name('location.update');
     Route::delete('location/{id}/delete', [App\Http\Controllers\admins\LocationController::class,'destroy'])->name('location.delete');

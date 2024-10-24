@@ -51,7 +51,7 @@
                 <nav aria-label="breadcrumb" role="navigation">
                     <ol class="breadcrumb page-head-nav">
                         <li class="breadcrumb-item"><a href="#">Quản lý tài khoản</a></li>
-                        <li class="breadcrumb-item active">Người dùng</li>
+                        <li class="breadcrumb-item active">Nhân viên</li>
                         <li class="breadcrumb-item active">Thêm tài khoản</li>
                     </ol>
                 </nav>
@@ -79,7 +79,7 @@
             </div>
         </div>
         <div class="main-content container-fluid">
-            <form action="{{ route('wp-admin.user.store') }}" id="user-project" onsubmit="return false || validate()" enctype="multipart/form-data" method="post">
+            <form action="{{ route('wp-admin.member.store') }}" id="user-project" onsubmit="return false || validate()" enctype="multipart/form-data" method="post">
                 @csrf
                 <div class="header mb-3">
                     <button onclick="return window.history.back()" class="btn btn-secondary btn-sm">Quay lại</button>
@@ -92,7 +92,7 @@
                                 <div class="card-header card-header-divider">
                                     <h3 class="m-0 p-0"><strong>Thông tin tài khoản</strong> <span class="icon mdi mdi-bookmark-outline"></span></h3>
                                     <span class="card-subtitle">
-                                        Thông tin người dùng sẽ sử dụng tài khoản này.
+                                        Thông tin nhân viên sẽ sử dụng tài khoản này.
                                     </span>
                                 </div>
                                 <div class="card-body">
@@ -100,7 +100,7 @@
                                         <div class="col">
                                             <div class="form-group">
                                                 <label class="form-label" for="name">Tên tài khoản <span class="text-danger">*</span></label> <span class="text-danger" id="name_validate"></span>
-                                                <input class="form-control form-control-sm" type="text" name="name" id="name" placeholder="Họ & tên">
+                                                <input class="form-control form-control-sm" type="text" name="name" id="name" value="{{old('name')}}" placeholder="Họ & tên">
                                             </div>
                                             <div class="form-group">
                                                 <label class="form-label" for="email">Địa chỉ email <span class="text-danger">*</span></label> <span class="text-danger" id="email_validate"></span>
@@ -121,7 +121,7 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group col">
-                                            <label class="form-label" for="birthday">Ngày sinh</label>
+                                            <label class="form-label" for="birthday">Ngày sinh <span class="text-danger">*</span></label> <span class="text-danger" id="birthday_validate"></span>
                                             <input class="form-control form-control-sm" type="date" name="birthday" id="birthday">
                                         </div>
                                         <div class="col">
@@ -135,22 +135,20 @@
                                         </div>
                                     </div>
                                     <div class="form-group">
-                                        <label class="form-label" for="password">Mật khẩu</label>
-                                        <div id="password">
-                                            <input onclick="formPassword(false)" class="radio-pas" type="radio" checked value="true" name="password-type" id="type-1">{{--- Điền sau ---}}
-                                            <label class="form-label m-0 mr-3 p-0" for="type-1">Tự độn tạo</label>
-                                            <input onclick="formPassword(true)" class="radio-pas" type="radio" value="false" name="password-type" id="type-2">{{--- Điền tại đây ---}}
-                                            <label class="form-label m-0 mr-3 p-0" for="type-2">Tạo thủ công</label>
-                                        </div>
+                                        <label class="form-label" for="name">Chức vụ<span class="text-danger">*</span></label>
+                                        <select class="form-control form-control-sm" name="role" id="role">
+                                            <option selected value="Nhân viên">Nhân viên</option>
+                                            <option value="Quản lý">Quản lý</option>
+                                        </select>
                                     </div>
-                                    <div class="form-pass" style="display: none;">
+                                    <div class="form-pass">
                                         <div class="form-group">
                                             <label class="form-label" for="name">Mật khẩu <span class="text-danger">*</span></label> <span class="text-danger" id="password_validate"></span>
-                                            <input disabled onchange="confixPassword()" class="form-control form-control-sm" type="password" name="password" id="password-1" placeholder="Mật khẩu">
+                                            <input class="form-control form-control-sm" type="password" name="password" id="password-1" placeholder="Mật khẩu">
                                         </div>
                                         <div class="form-group">
-                                            <label class="form-label" for="password-2">Xác nhận mật khẩu <span class="text-danger">*</span></label> <span id="confixP" class="text-danger"></span>
-                                            <input disabled onchange="confixPassword()" class="form-control form-control-sm" type="password" name="password_confix" id="password-2" placeholder="Nhập lại mật khẩu">
+                                            <label class="form-label" for="password-2">Xác nhận mật khẩu <span class="text-danger">*</span></label> <span id="password_confix" class="text-danger"></span>
+                                            <input class="form-control form-control-sm" type="password" name="password_confix" id="password-2" placeholder="Nhập lại mật khẩu">
                                         </div>
                                     </div>
                                 </div>
@@ -160,16 +158,49 @@
                             <div class="widget widget-fullwidth widget-small">
                                 <div class="widget-head pb-6">
                                     <div class="tools">
-                                        <button type="button" class="btn btn-space btn-outline-danger" id="Location_d">Xóa tất cả</button>
-                                        <button type="button" class="btn btn-space btn-outline-info btn-space" data-toggle="modal" data-target="#md-location" type="button">
-                                            Thêm địa chỉ
-                                        </button>
+                                        {{-- BTN --}}
                                     </div>
-                                    <div class="title"><strong>Địa chỉ</strong></div>
+                                    <div class="title"><strong>Thông tin liên hệ</strong></div>
                                 </div>
                                 <div class="widget-chart-container">
                                     <div class="accordion" id="accordion">
-                                    
+                                        <div class="card-body">
+                                            <input type="hidden" name="location[location_name]" value="Thông tin liên hệ">
+                                            <div class="form-group">
+                                                <label class="form-label" for="location[user_name]">Họ và Tên <span class="text-danger">*</span></label> <span id="user_name_validate" class="text-danger"></span>
+                                                <input class="form-control form-control-sm" type="text" name="location[user_name]" id="location[user_name]" placeholder="Họ và tên nhân viên">
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="location[phone_number]">Số điện thoại liên hệ <span class="text-danger">*</span></label> <span id="phone_number_validate" class="text-danger"></span>
+                                                <input class="form-control form-control-sm" type="text" name="location[phone_number]" id="location[phone_number]" placeholder="Số điện thoại lên hệ">
+                                            </div>
+                                            <label class="form-label">Địa chỉ nhân viên</label>
+                                            <hr class="mt-0">
+                                            <div class="row">
+                                                <div class="form-group col">
+                                                    <label class="form-label" for="city">Tỉnh <span class="text-danger">*</span></label> <span id="city_province_validate" class="text-danger"></span>
+                                                    <select class="form-control form-control-sm" name="location[city_province]" id="city">
+                                                        <option value="" selected>Chọn tỉnh thành</option>           
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col">
+                                                    <label class="form-label" for="district">Huyện <span class="text-danger">*</span></label> <span id="district_validate" class="text-danger"></span>
+                                                    <select class="form-control form-control-sm" name="location[district]" id="district">
+                                                        <option value="" selected>Chọn quận huyện</option>
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col">
+                                                    <label class="form-label" for="ward">Xã <span class="text-danger">*</span></label> <span id="commune_validate" class="text-danger"></span>
+                                                    <select class="form-control form-control-sm" name="location[commune]" id="ward">
+                                                        <option value="" selected>Chọn phường xã</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="form-label" for="location[location_detail]">Địa chỉ chi tiết <span class="text-danger">*</span></label> <span id="location_detail_validate" class="text-danger"></span>
+                                                <textarea class="form-control form-control-sm" name="location[location_detail]" id="location[location_detail]" cols="30" rows="3"></textarea>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -177,63 +208,6 @@
                     </div>
                 </div>
             </form>
-        </div>
-    </div>
-    <div class="modal fade" id="md-location" tabindex="-1" role="dialog">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <form method="post" id="formLocation">
-                    <div class="modal-header">
-                        <button class="close" type="button" data-dismiss="modal" aria-hidden="true"><span class="mdi mdi-close"></span></button>
-                    </div>
-                    <div class="modal-body">
-                        <div class="container">
-                            <h2 class="text-center mt-0 mb-5">Thêm địa chỉ</h2>
-                            <div class="form-group">
-                                <label class="form-label" for="location_name">Tên địa chỉ <span class="text-danger">*</span></label> <span id="location_name-validate" class="text-danger"></span>
-                                <input class="form-control form-control-sm" type="text" name="location_name" id="location_name" placeholder="Tên địa chỉ" value="">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="user_name">Tên người nhận <span class="text-danger">*</span></label> <span id="user_name-validate" class="text-danger"></span>
-                                <input class="form-control form-control-sm" type="text" name="user_name" id="user_name" placeholder="Họ & tên">
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="phone">Số điện thoại <span class="text-danger">*</span></label> <span class="text-danger"></span>
-                                <input class="form-control form-control-sm" type="text" name="phone" id="phone" placeholder="+(00)-0000-0000">
-                            </div>
-                            <div class="row">
-                                <div class="form-group col">
-                                    <label class="form-label" for="city">Tỉnh <span class="text-danger">*</span></label> <span id="city_province-validate" class="text-danger"></span>
-                                    <select class="form-control form-control-sm" name="city_province" id="city">
-                                        <option value="" selected>Chọn tỉnh thành</option>           
-                                    </select>
-                                </div>
-                                <div class="form-group col">
-                                    <label class="form-label" for="district">Huyện <span class="text-danger">*</span></label> <span id="district-validate" class="text-danger"></span>
-                                    <select class="form-control form-control-sm" name="district" id="district">
-                                        <option value="" selected>Chọn quận huyện</option>
-                                    </select>
-                                </div>
-                                <div class="form-group col">
-                                    <label class="form-label" for="ward">Xã <span class="text-danger">*</span></label> <span id="commune-validate" class="text-danger"></span>
-                                    <select class="form-control form-control-sm" name="commune" id="ward">
-                                        <option value="" selected>Chọn phường xã</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="form-label" for="location_detail">Địa chỉ chi tiết <span class="text-danger">*</span></label> <span id="location_detail-validate" class="text-danger"></span>
-                                <textarea class="form-control form-control-sm" name="location_detail" id="location_detail" cols="30" rows="3"></textarea>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal" id="exit">Hủy</button>
-                        <button class="btn btn-warning" type="reset">Reset</button>
-                        <button class="btn btn-success" type="submit">Thêm</button>
-                    </div>
-                </form>
-            </div>
         </div>
     </div>
 @endsection
@@ -280,35 +254,7 @@
                 this.options[0].style.display = 'none';
             });
         </script>
-        <script>
-            function formPassword(check) {
-                const formElements = document.querySelector('.form-pass');
-                const password_One = document.querySelector('#password-1');
-                const password_Tow = document.querySelector('#password-2');
-                if(check) {//check = true
-                    formElements.style.display = "block";
-                    password_One.disabled = false;
-                    password_Tow.disabled = false;
-                }
-                else {
-                    formElements.style.display = "none";
-                    password_One.disabled = true;
-                    password_Tow.disabled = true;
-                }
-            }
-            function confixPassword() {
-                const password_One = document.querySelector('#password-1');
-                const password_Tow = document.querySelector('#password-2');
-
-                if(password_One.value !== password_Tow.value) {
-                    document.querySelector('#confixP').innerText = "Mật khẩu không khớp!";
-                }   
-                else {
-                    document.querySelector('#confixP').innerText = "";
-                }
-            }
-        </script>
-    {{-- JS Chọn Quận huyện xã --}}
+    {{--  --}}
         <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
         <script>
             const host = "https://provinces.open-api.vn/api/";
@@ -363,104 +309,11 @@
             
             }
         </script>
-    {{-- Validate create location --}}
+    {{-- Validate form user --}}
         <script>
-            const Location_d = document.querySelector('#Location_d');
-            Location_d.addEventListener('click', ()=> {
-                sessionStorage.clear();
-                showLocation();
-            });
-            const formData = {};
-            const formLocation = document.querySelector('#formLocation');
-            formLocation.addEventListener('submit', (event) => {
-            event.preventDefault();
-            let check = true;
-            // Validate 
-            for (const element of formLocation.elements) {
-                if (element.value === "") {
-                if (document.querySelector(`#${element.name}-validate`)) {
-                    document.querySelector(`#${element.name}-validate`).innerHTML = `Không thể bỏ trống!`;
-                    check = false;
-                }
-                } else {
-                formData[element.name] = element.value;
-                }
-            }
-            if (check) {
-                let storedData = sessionStorage.getItem('locations');
-                let data = storedData ? JSON.parse(storedData) : [];
-                data.push(formData);
-                sessionStorage.setItem('locations', JSON.stringify(data));
-                showLocation()
-                document.querySelector('#exit').click();
-                formData = {};
-            }
-            });
             const birthdayInput = document.getElementById('birthday');
             const today = new Date().toISOString().split('T')[0];
             birthdayInput.max = today;
-        </script>
-    {{-- HIển thị địa chỉ --}}
-        <script>
-            const accordion = document.querySelector('#accordion');
-            showLocation();
-            function showLocation() {
-                const storedData = sessionStorage.getItem('locations');
-                const locations = JSON.parse(storedData);
-                if(locations == null) {
-                    accordion.innerHTML = "";
-                }
-                else {
-                    const formEm = locations.map((item, index) => {
-                    return `
-                        <div class="card">
-                            <div class="card-header" id="heading${index}" role="tab">
-                                <button class="btn" type="button" data-toggle="collapse" data-target="#collapse${index}" aria-expanded="false" aria-controls="collapse${index}">
-                                    <i class="icon mdi mdi-chevron-right"></i>${item.location_name}<input type="hidden" name="locations[${index}][location_name]" value="${item.location_name}">
-                                </button>
-                            </div>
-                            <div class="collapse mt-3" id="collapse${index}" aria-labelledby="heading${index}" data-parent="#accordion">
-                                <div class="card-body">
-                                    <div class="form-group">
-                                        <label class="form-label" for="locations[${index}][user_name]">Tên người nhận <span class="text-danger">*</span></label>
-                                        <input class="form-control form-control-sm" type="text" name="locations[${index}][user_name]" id="locations[${index}][user_name]" value="${item.user_name}" placeholder="Họ & tên">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="form-label" for="locations[${index}][phone_number]">Số điện thoại <span class="text-danger">*</span></label>
-                                        <input class="form-control form-control-sm" type="text" name="locations[${index}][phone_number]" id="locations[${index}][phone_number]" value="${item.phone}" placeholder="+(000)-000-000">
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col">
-                                            <label class="form-label" for="locations[${index}][city_province]">Tỉnh <span class="text-danger">*</span></label>
-                                            <input class="form-control form-control-sm" type="text" name="locations[${index}][city_province]" id="locations[${index}][city_province]" value="${item.city_province}" placeholder="Tỉnh">
-                                        </div>
-                                        <div class="form-group col">
-                                            <label class="form-label" for="locations[${index}][district]">Huyện <span class="text-danger">*</span></label>
-                                            <input class="form-control form-control-sm" type="text" name="locations[${index}][district]" id="locations[${index}][district]" value="${item.district}" placeholder="Tỉnh">
-                                        </div>
-                                        <div class="form-group col">
-                                            <label class="form-label" for="locations[${index}][commune]">Xã <span class="text-danger">*</span></label>
-                                            <input class="form-control form-control-sm" type="text" name="locations[${index}][commune]" id="locations[${index}][commune]" value="${item.commune}" placeholder="Tỉnh">
-                                        </div>
-                                        <div class="form-group col">
-                                            <label class="form-label" for="locations[${index}][location_detail]">Chi tiết <span class="text-danger">*</span></label>
-                                            <input class="form-control form-control-sm" type="text" name="locations[${index}][location_detail]" id="locations[${index}][location_detail]" value="${item.location_detail}" placeholder="Tỉnh">
-                                        </div>
-                                    </div>
-                                    <div style="text-align: end;">
-                                        <button type="button" class="btn btn-space btn-outline-danger">Xóa</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                    }).join('');
-                    accordion.innerHTML = formEm;
-                }
-            }
-        </script>
-    {{-- Validate form user --}}
-        <script>
             const form = document.querySelector('#user-project');
             function validate() {
                 var check = true;
@@ -513,6 +366,15 @@
                         document.querySelector('#phone_validate').innerText = "";
                         check = true;
                     }
+                // Birthday validate
+                    if(form.elements.birthday.value == "") {
+                        document.querySelector('#birthday_validate').innerText = "Không thể bỏ trống ngày sinh!";
+                        check = false;
+                    }
+                    else {
+                        document.querySelector('#birthday_validate').innerText = "";
+                        check = true;
+                    }
                 // Giới tính validate
                     if(form.elements.gender.value == "") {
                         document.querySelector('#gender_validate').innerText = "Không thể bỏ trống giới tính!"
@@ -523,19 +385,84 @@
                         check = true;
                     }
                 // Password validate
-                    const formEl = document.querySelector('.form-pass');
-                    if(formEl.style.display == "block") {
-                        if(form.elements.password.value == "") {
-                            document.querySelector('#password_validate').innerText = "Không thể bỏ trống mật khẩu!"
+                    if(form.elements.password.value == "") {
+                        document.querySelector('#password_validate').innerText = "Không thể bỏ trống mật khẩu!"
+                        check = false;
+                    }
+                    else if(form.elements.password.value.length < 6) {
+                        document.querySelector('#password_validate').innerText = "Mật khẩu tối thiểu 6 ký tự!"
+                        check = false;
+                    }
+                    else if(form.elements.password.value.length > 255) {
+                        document.querySelector('#password_validate').innerText = "Mật khẩu quá dài!"
+                        check = false;
+                    }
+                    else {
+                        document.querySelector('#password_validate').innerText = ""
+                        check = true;
+                        if(form.elements.password_confix.value == "") {
+                            document.querySelector('#password_confix').innerText = "Chưa xác nhận mật khẩu";
                             check = false;
                         }
-                        const checkP =  document.querySelector('#confixP').innerText;
-                        if(checkP == "") {
+                        else if(form.elements.password_confix.value !== form.elements.password.value) {
+                            document.querySelector('#password_confix').innerText = "Mật khẩu không khớp!";
+                            check = false
+                        }
+                        else{
+                            document.querySelector('#password_confix').innerText = "";
                             check = true;
                         }
-                        else {
-                            check = false;
-                        }
+                    }
+                // User name
+                    if(form.elements['location[user_name]'].value == "") {
+                        document.querySelector('#user_name_validate').innerText = "Không thể bỏ trống họ và tên nhân viên!";
+                        check = false;
+                    }
+                    else if(form.elements['location[user_name]'].value.length > 255) {
+                        document.querySelector('#user_name_validate').innerText = "Tên nhân viên quá dài!";
+                        check = false;
+                    }
+                    else {
+                        document.querySelector('#user_name_validate').innerText = "";
+                    }
+                    if(form.elements['location[phone_number]'].value == "") {
+                        document.querySelector('#phone_number_validate').innerText = "Không thể bỏ trống số điện thoại liên hệ!";
+                        check = false;
+                    }
+                    else if(form.elements['location[phone_number]'].value.length > 11) {
+                        document.querySelector('#phone_number_validate').innerText = "Số điện thoại quá dài!";
+                        check = false;
+                    }
+                    else {
+                        document.querySelector('#phone_number_validate').innerText = "";
+                    }
+                    if(form.elements['location[city_province]'].value == "") {
+                        document.querySelector('#city_province_validate').innerText = "Bạn chưa chọn Tỉnh!";
+                        check = false;
+                    }
+                    else {
+                        document.querySelector('#city_province_validate').innerText = "";
+                    }
+                    if(form.elements['location[district]'].value == "") {
+                        document.querySelector('#district_validate').innerText = "Bạn chưa chọn Tỉnh!";
+                        check = false;
+                    }
+                    else {
+                        document.querySelector('#district_validate').innerText = "";
+                    }
+                    if(form.elements['location[commune]'].value == "") {
+                        document.querySelector('#commune_validate').innerText = "Bạn chưa chọn Tỉnh!";
+                        check = false;
+                    }
+                    else {
+                        document.querySelector('#commune_validate').innerText = "";
+                    }
+                    if(form.elements['location[location_detail]'].value == "") {
+                        document.querySelector('#location_detail_validate').innerText = "Bạn chưa chọn Tỉnh!";
+                        check = false;
+                    }
+                    else {
+                        document.querySelector('#location_detail_validate').innerText = "";
                     }
                 if(check) {
                     return true;
@@ -544,4 +471,5 @@
             }
             
         </script>
+    
 @endsection

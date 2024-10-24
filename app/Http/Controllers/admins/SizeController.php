@@ -14,6 +14,7 @@ class SizeController extends Controller
     public function index()
     {
         //
+        abort(404);
     }
 
     /**
@@ -22,6 +23,7 @@ class SizeController extends Controller
     public function create()
     {
         //
+        abort(404);
     }
 
     /**
@@ -48,6 +50,7 @@ class SizeController extends Controller
     public function show(string $id)
     {
         //
+        abort(404);
     }
 
     /**
@@ -56,6 +59,7 @@ class SizeController extends Controller
     public function edit(string $id)
     {
         //
+        abort(404);
     }
 
     /**

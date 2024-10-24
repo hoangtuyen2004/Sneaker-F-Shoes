@@ -77,7 +77,7 @@
                             <div class="user-display-bottom">
                                 <div class="user-display-avatar">
                                     @if ($user->image != null && Storage::disk('public')->exists($user->image))
-                                        <img src="{{ Storage::url($user->image) }}" alt="Avatar">
+                                        <img style="object-fit: cover;" src="{{ Storage::url($user->image) }}" alt="Avatar">
                                     @else
                                         <img src="{{ asset('assets/admins/img/avatar-150.png') }}" alt="Avatar">
                                     @endif

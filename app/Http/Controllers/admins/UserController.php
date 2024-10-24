@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\admins;
 
 use App\Http\Controllers\Controller;
+use App\Mail\MailRegister;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
+use Str;
 
 class UserController extends Controller
 {
@@ -34,6 +37,35 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        if($request->input('password-type')) {
+            $user = $request->only('name','email','phone_number','birthday','gender');
+            $user['password'] = Str::random(8);
+        }
+        else {
+            $user = $request->only('name','email','phone_number','birthday','gender', 'password');
+        }
+        if($request->hasFile('image')) {
+            $user['image'] = $request->file('image')->store('uploads/userImage', 'public');
+        }
+        $user['user_code'] = "KH_". User::query()->max('id')+1;
+        $user['role'] = "Khách hàng";
+        $user['status'] = "Hoạt động";
+        $user_create = User::query()->create($user);
+        Mail::to($user_create['email'])->send(new MailRegister($user_create));
+        if($request->input('locations')) {
+            $locations = $request->input('locations');
+            foreach ($locations as $key => $location) {
+                if($key == 0) {
+                    $location['status'] = 1;
+                }
+                else {
+                    $location['status'] = 0;
+                }
+                $user_create->location()->create($location);
+                
+            }
+        }
+        return redirect()->route('wp-admin.user.index')->with('success', 'Thêm mới thành công!');
     }
 
     /**

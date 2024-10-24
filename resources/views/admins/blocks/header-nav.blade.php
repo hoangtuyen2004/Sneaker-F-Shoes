@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand fixed-top be-top-header">
     <div class="container-fluid">
         <div class="be-navbar-header">
-            <a class="" href="index.html">
+            <a class="" href="{{ route('wp-admin.') }}">
                 <div class="">
                     <img src="{{ asset('assets/admins/img/Logo.png')}}" class="mx-3" alt="Logo" style="width: 50%;">
                 </div>

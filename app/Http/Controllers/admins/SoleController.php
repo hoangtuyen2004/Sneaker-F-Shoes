@@ -46,6 +46,8 @@ class SoleController extends Controller
     public function show(string $id)
     {
         //
+        abort(404);
+
     }
 
     /**
@@ -54,6 +56,7 @@ class SoleController extends Controller
     public function edit(string $id)
     {
         //
+        abort(404);
     }
 
     /**
@@ -66,7 +69,7 @@ class SoleController extends Controller
             $data = $request->only('name');
             $sole = Sole::findOrFail($id);
             $sole->update($data);
-            return redirect()->route('sole.index')->with('success', 'Sửa đế giày thành công thành công');
+            return back()->with('success', 'Sửa đế giày thành công thành công');
         }
     }
 
@@ -79,7 +82,7 @@ class SoleController extends Controller
         if($request->isMethod('DELETE')) {
             $sole = Sole::findOrFail($id);
             $sole->delete();
-            return redirect()->route('sole.index')->with('warning', 'Xóa đế giày thành công thành công');
+            return back()->with('warning', 'Xóa đế giày thành công thành công');
         }
     }
 }

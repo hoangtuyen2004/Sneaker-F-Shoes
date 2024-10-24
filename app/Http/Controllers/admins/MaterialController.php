@@ -25,7 +25,7 @@ class MaterialController extends Controller
     public function create()
     {
         //
-        dd('Material.create');
+        abort(404);
     }
 
     /**
@@ -47,7 +47,7 @@ class MaterialController extends Controller
     public function show(string $id)
     {
         //
-        dd('Material.show');
+        abort(404);
     }
 
     /**
@@ -56,7 +56,7 @@ class MaterialController extends Controller
     public function edit(string $id)
     {
         //
-        dd('Material.edit');
+        abort(404);
     }
 
     /**
@@ -69,7 +69,7 @@ class MaterialController extends Controller
             $data = $request->only('name');
             $material = Material::query()->findOrFail($id);
             $material->update($data);
-            return redirect()->route('material.index')->with('success', 'Sửa chất liệu thành công');
+            return back()->with('success', 'Sửa chất liệu thành công');
         }
     }
 
@@ -82,7 +82,7 @@ class MaterialController extends Controller
         if($request->isMethod('DELETE')) {
             $material = Material::query()->findOrFail($id);
             $material->delete();
-            return redirect()->route('material.index')->with('warning','Xóa chất liệu thành công');
+            return back()->with('warning','Xóa chất liệu thành công');
         }
     }
 }
