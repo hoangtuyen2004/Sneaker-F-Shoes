@@ -34,4 +34,7 @@ class Attribute extends Model
     {
         return $this->belongsTo(Size::class);
     }
+    public function cart() {
+        return $this->belongsToMany(Cart::class);
+    }
 }

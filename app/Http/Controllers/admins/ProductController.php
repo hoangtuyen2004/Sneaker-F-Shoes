@@ -46,7 +46,7 @@ class ProductController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(ProductRequest $request)
+    public function store(Request $request)
     {
         //
         if($request->isMethod('POST')) {
@@ -60,14 +60,12 @@ class ProductController extends Controller
                 $attribute['colors_id'] = $request[$attribute['color_code']];
                 $new_attribute = $new_product->attribute()->create($attribute);
                 $files = $request->file('image');
-                foreach ($files as $file) {
-                    foreach ($file as $i) {
-                        $img['url'] = $i->store('uploads/productImg', 'public');
-                        $new_attribute->url_image()->create($img);
-                    }
+                foreach ($files[$attribute['color_code']] as $k => $file) {
+                    $img['url'] = $file->store('uploads/productImg', 'public');
+                    $new_attribute->url_image()->create($img);
                 }
             }
-            return redirect()->route('product.index')->with('success', 'Thêm mới thành công');
+            return redirect()->route('wp-admin.product.index')->with('success', 'Thêm mới thành công');
         }
     }
 
@@ -116,7 +114,7 @@ class ProductController extends Controller
                 $attribute_update = Attribute::query()->findOrFail($attribute['id']);
                 $attribute_update->update($attribute);
             }
-            return redirect()->route('product.index')->with('success', 'Sửa sản phẩm thành công');
+            return redirect()->route('wp-admin.product.index')->with('success', 'Sửa sản phẩm thành công');
         }
     }
 
@@ -129,7 +127,7 @@ class ProductController extends Controller
         if($request->isMethod('DELETE')) {
             $product = Product::query()->findOrFail($id);
             $product->delete();
-            return redirect()->route('product.index')->with('warning','Xóa thành công sản phẩm '.$product->name);
+            return redirect()->route('wp-admin.product.index')->with('warning','Xóa thành công sản phẩm '.$product->name);
         }
     }
 }

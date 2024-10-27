@@ -3,7 +3,7 @@
         <div class="nav-depart">
             <div class="depart-btn">
                 <i class="ti-menu"></i>
-                <span>All departments</span>
+                <span>Danh mục</span>
                 <ul class="depart-hover">
                     <li><a href="#">Women’s Clothing</a></li>
                     <li><a href="#">Men’s Clothing</a></li>

@@ -73,7 +73,7 @@
             font-weight: 700;
             padding: 2px 0px;
             width: 50px;
-            border: 1px solid #ebebeb;
+            border: 1px solid gainsboro;
             text-align: center;
             text-transform: uppercase;
             cursor: pointer;

@@ -228,23 +228,48 @@
     /*-------------------
 		Quantity change
 	--------------------- */
-    var proQty = $('.pro-qty');
-	proQty.prepend('<span class="dec qtybtn">-</span>');
-	proQty.append('<span class="inc qtybtn">+</span>');
-	proQty.on('click', '.qtybtn', function () {
-		var $button = $(this);
-		var oldValue = $button.parent().find('input').val();
-		if ($button.hasClass('inc')) {
-			var newVal = parseFloat(oldValue) + 1;
-		} else {
-			// Don't allow decrementing below zero
-			if (oldValue > 0) {
-				var newVal = parseFloat(oldValue) - 1;
-			} else {
-				newVal = 0;
-			}
-		}
-		$button.parent().find('input').val(newVal);
-	});
+    // Cập nhật giỏ
+    // function updateTotal() {
+    //     var subTotal = 0;
+    //     $('.quantityInput').each(function () {
+    //         var $input = $(this);
+    //         var price = parseFloat($input.data('price'));
+    //         var quantity = parseFloat($input.val());
+    //         subTotal += price * quantity;
+
+    //         // Mã giảm giá
+    //         var voucher = parseFloat($('.voucher').text().replace(/\./g,'').replace('₫', ''));
+    //         var total = subTotal - voucher;
+    //         // hiện giá trị
+    //         $('.voucher').text(voucher.toLocaleString('vi-VN')+'₫');
+    //         $('.subTotal').text(subTotal.toLocaleString('vi-VN')+'₫');
+    //         $('.total').text(total.toLocaleString('vi-VN')+'₫');
+    //     })
+    // }
+    // var proQty = $('.pro-qty');
+	// proQty.prepend('<span class="dec qtybtn">-</span>');
+	// proQty.append('<span class="inc qtybtn">+</span>');
+	// proQty.on('click', '.qtybtn', function () {
+	// 	var $button = $(this);
+    //     var $input =  $button.parent().find('input');
+	// 	var oldValue = $button.parent().find('input').val();
+	// 	if ($button.hasClass('inc')) {
+	// 		var newVal = parseFloat(oldValue) + 1;
+	// 	} else {
+	// 		// Don't allow decrementing below zero
+	// 		if (oldValue > 1) {
+	// 			var newVal = parseFloat(oldValue) - 1;
+	// 		} else {
+	// 			newVal = 1;
+	// 		}
+	// 	}
+	// 	$input.val(newVal);
+
+    //     var price = parseFloat($input.data('price'));
+    //     var subTotalElement = $input.closest('tr').find('.sub-Total');
+    //     var newSubtotal = newVal * price;
+    //     subTotalElement.text('₫' + newSubtotal.toLocaleString('vi-VN'));
+    //     updateTotal();
+	// });
 
 })(jQuery);

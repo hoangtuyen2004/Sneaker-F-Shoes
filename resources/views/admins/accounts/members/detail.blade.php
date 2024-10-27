@@ -245,96 +245,178 @@
                         </div>
                     </div>
                     <div class="col-lg-7">
-                        @foreach ($member->location as $key => $location)
-                        <div class="widget widget-fullwidth widget-small">
-                            <div class="widget-head pb-6">
-                                <div class="tools">
-                                    <button class="btn btn-space btn-outline-success btn-space" data-toggle="modal" data-target="#md-footer-update" type="button">Sửa</button>
+                        @if ($member->location->count()==0)
+                            <div class="widget widget-fullwidth widget-small">
+                                <div class="widget-head pb-6">
+                                    <div class="tools">
+                                        <button class="btn btn-space btn-outline-success btn-space" data-toggle="modal" data-target="#md-location-create" type="button">Thêm thông tin</button>
+                                    </div>
+                                    <div class="title">Thông tin liên hệ</div>
                                 </div>
-                                <div class="title">{{$location->location_name}}</div>
-                            </div>
-                            <div class="row m-0 p-0">
-                                <div class="col-12 col-lg-12">
-                                    <div class="user-info-list">
-                                        <div class="card-body">
-                                            <table class="no-border no-strip skills">
-                                            <tbody class="no-border-x no-border-y">
-                                                <tr>
-                                                    <td class="icon"><span class="mdi mdi-account-calendar"></span></td>
-                                                    <td class="item">Họ và tên nhân viên<span class="icon s7-portfolio"></span></td>
-                                                    <td>{{ $location->user_name }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="icon"><span class="mdi mdi-phone-msg"></span></td>
-                                                    <td class="item">Số điện thoại liên hệ<span class="icon s7-portfolio"></span></td>
-                                                    <td>{{ $location->phone_number }}</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="icon"><span class="mdi mdi-pin"></span></td>
-                                                    <td class="item">Địa chỉ<span class="icon s7-portfolio"></span></td>
-                                                    <td>{{$location->city_province}} - {{$location->district}} - {{$location->commune}} - {{$location->location_detail}}</td>
-                                                </tr>
-                                            </tbody>
-                                            </table>
+                                <div class="row">
+                                    <div class="be-wrapper w-100 p-0 be-error be-error-404">
+                                        <div class="m-0 be-content">
+                                          <div class="main-content container-fluid">
+                                            <div class="error-container">
+                                              <div class="error-description"><strong>Ôi! không có dữ liệu ở đây</strong></div>
+                                              <div class="error-goback-text"></div>
+                                              <div class="error-goback-button">@_@</div>
+                                              <div class="footer"></div>
+                                            </div>
+                                          </div>
                                         </div>
-                                        <div style="text-align: end;">
-                                            {{-- Sửa --}}
-                                            <div class="modal fade" id="md-footer-update" tabindex="-1" role="dialog" style="text-align: start;">
-                                                <div class="modal-dialog">
-                                                    <div class="modal-content">
-                                                        <form action="{{ route('wp-admin.location.update',$location->id) }}" method="post">
-                                                            @csrf
-                                                            @method('PUT')
-                                                            <div class="modal-header">
-                                                                <button class="close" type="button" data-dismiss="modal" aria-hidden="true"><span class="mdi mdi-close"></span></button>
-                                                            </div>
-                                                            <div class="modal-body">
-                                                                <div class="container">
-                                                                    <h2 class="text-center mt-0 mb-5">Sửa thông tin liên hệ</h2>
-                                                                    <div class="form-group">
-                                                                        <label class="form-label" for="user_name">Họ và tên</label>
-                                                                        <input class="form-control form-control-sm" type="text" name="user_name" id="user_name" placeholder="Họ & tên nhân viên" value="{{$location->user_name}}">
+                                      </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="md-location-create" tabindex="-1" role="dialog" style="text-align: start;">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <form action="{{ route('wp-admin.member.update',$member->id) }}" method="post">
+                                            @csrf
+                                            @method('PUT')
+                                            <div class="modal-header">
+                                                <button class="close" type="button" data-dismiss="modal" aria-hidden="true"><span class="mdi mdi-close"></span></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <div class="container">
+                                                    <h2 class="text-center mt-0 mb-5">Thêm thông tin liên hệ</h2>
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="user_name">Họ và tên</label>
+                                                        <input class="form-control form-control-sm" type="text" name="user_name" id="user_name" placeholder="Họ & tên nhân viên" value="">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="phone_number">Số điện thoại liên hệ</label>
+                                                        <input class="form-control form-control-sm" type="text" name="phone_number" id="phone_number" placeholder="+(00)-0000-0000" value="">
+                                                    </div>
+                                                    <label class="label" for="">Địa chỉ</label>
+                                                    <hr class="mt-0">
+                                                    <div class="row">
+                                                        <div class="form-group col">
+                                                            <label class="form-label" for="city">Tỉnh <span class="text-danger">*</span></label> <span id="city_province_validate" class="text-danger"></span>
+                                                            <select class="form-control form-control-sm" name="city_province" id="city">
+                                                                <option value="" selected>Chọn tỉnh thành</option>           
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col">
+                                                            <label class="form-label" for="district">Huyện <span class="text-danger">*</span></label> <span id="district_validate" class="text-danger"></span>
+                                                            <select class="form-control form-control-sm" name="district" id="district">
+                                                                <option value="" selected>Chọn quận huyện</option>
+                                                            </select>
+                                                        </div>
+                                                        <div class="form-group col">
+                                                            <label class="form-label" for="ward">Xã <span class="text-danger">*</span></label> <span id="commune_validate" class="text-danger"></span>
+                                                            <select class="form-control form-control-sm" name="commune" id="ward">
+                                                                <option value="" selected>Chọn phường xã</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <label class="form-label" for="location_detail">Địa chỉ chi tiết</label>
+                                                        <textarea class="form-control form-control-sm" name="location_detail" id="location_detail" cols="30" rows="3"></textarea>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                                                <button class="btn btn-success" type="submit" value="true" name="location-create">Lưu</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        @else
+                            @foreach ($member->location as $key => $location)
+                                <div class="widget widget-fullwidth widget-small">
+                                    <div class="widget-head pb-6">
+                                        <div class="tools">
+                                            <button class="btn btn-space btn-outline-success btn-space" data-toggle="modal" data-target="#md-footer-update" type="button">Sửa</button>
+                                        </div>
+                                        <div class="title">{{$location->location_name}}</div>
+                                    </div>
+                                    <div class="row m-0 p-0">
+                                        <div class="col-12 col-lg-12">
+                                            <div class="user-info-list">
+                                                <div class="card-body">
+                                                    <table class="no-border no-strip skills">
+                                                    <tbody class="no-border-x no-border-y">
+                                                        <tr>
+                                                            <td class="icon"><span class="mdi mdi-account-calendar"></span></td>
+                                                            <td class="item">Họ và tên nhân viên<span class="icon s7-portfolio"></span></td>
+                                                            <td>{{ $location->user_name }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="icon"><span class="mdi mdi-phone-msg"></span></td>
+                                                            <td class="item">Số điện thoại liên hệ<span class="icon s7-portfolio"></span></td>
+                                                            <td>{{ $location->phone_number }}</td>
+                                                        </tr>
+                                                        <tr>
+                                                            <td class="icon"><span class="mdi mdi-pin"></span></td>
+                                                            <td class="item">Địa chỉ<span class="icon s7-portfolio"></span></td>
+                                                            <td>{{$location->city_province}} - {{$location->district}} - {{$location->commune}} - {{$location->location_detail}}</td>
+                                                        </tr>
+                                                    </tbody>
+                                                    </table>
+                                                </div>
+                                                <div style="text-align: end;">
+                                                    {{-- Sửa --}}
+                                                    <div class="modal fade" id="md-footer-update" tabindex="-1" role="dialog" style="text-align: start;">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <form action="{{ route('wp-admin.location.update',$location->id) }}" method="post">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <div class="modal-header">
+                                                                        <button class="close" type="button" data-dismiss="modal" aria-hidden="true"><span class="mdi mdi-close"></span></button>
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label class="form-label" for="phone_number">Số điện thoại liên hệ</label>
-                                                                        <input class="form-control form-control-sm" type="text" name="phone_number" id="phone_number" placeholder="+(00)-0000-0000" value="{{$location->phone_number}}">
-                                                                    </div>
-                                                                    <label class="label" for="">Địa chỉ</label>
-                                                                    <hr class="mt-0">
-                                                                    <div class="row">
-                                                                        <div class="form-group col">
-                                                                            <label class="form-label" for="city_province">Tỉnh/Thành phố</label>
-                                                                            <input class="form-control form-control-sm" type="text" name="city_province" id="city_province" placeholder="city_province" value="{{$location->city_province}}">
+                                                                    <div class="modal-body">
+                                                                        <div class="container">
+                                                                            <h2 class="text-center mt-0 mb-5">Sửa thông tin liên hệ</h2>
+                                                                            <div class="form-group">
+                                                                                <label class="form-label" for="user_name">Họ và tên</label>
+                                                                                <input class="form-control form-control-sm" type="text" name="user_name" id="user_name" placeholder="Họ & tên nhân viên" value="{{$location->user_name}}">
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="form-label" for="phone_number">Số điện thoại liên hệ</label>
+                                                                                <input class="form-control form-control-sm" type="text" name="phone_number" id="phone_number" placeholder="+(00)-0000-0000" value="{{$location->phone_number}}">
+                                                                            </div>
+                                                                            <label class="label" for="">Địa chỉ</label>
+                                                                            <hr class="mt-0">
+                                                                            <div class="row">
+                                                                                <div class="form-group col">
+                                                                                    <label class="form-label" for="city_province">Tỉnh/Thành phố</label>
+                                                                                    <input class="form-control form-control-sm" type="text" name="city_province" id="city_province" placeholder="city_province" value="{{$location->city_province}}">
+                                                                                </div>
+                                                                                <div class="form-group col">
+                                                                                    <label class="form-label" for="district">Quận/Huyện</label>
+                                                                                    <input class="form-control form-control-sm" type="text" name="district" id="district" placeholder="district" value="{{$location->district}}">
+                                                                                </div>
+                                                                                <div class="form-group col">
+                                                                                    <label class="form-label" for="commune">Xã</label>
+                                                                                    <input class="form-control form-control-sm" type="text" name="commune" id="commune" placeholder="commune" value="{{$location->commune}}">
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="form-group">
+                                                                                <label class="form-label" for="location_detail">Địa chỉ chi tiết</label>
+                                                                                <textarea class="form-control form-control-sm" name="location_detail" id="location_detail" cols="30" rows="3">{{$location->location_detail}}</textarea>
+                                                                            </div>
                                                                         </div>
-                                                                        <div class="form-group col">
-                                                                            <label class="form-label" for="district">Quận/Huyện</label>
-                                                                            <input class="form-control form-control-sm" type="text" name="district" id="district" placeholder="district" value="{{$location->district}}">
-                                                                        </div>
-                                                                        <div class="form-group col">
-                                                                            <label class="form-label" for="commune">Xã</label>
-                                                                            <input class="form-control form-control-sm" type="text" name="commune" id="commune" placeholder="commune" value="{{$location->commune}}">
-                                                                        </div>
                                                                     </div>
-                                                                    <div class="form-group">
-                                                                        <label class="form-label" for="location_detail">Địa chỉ chi tiết</label>
-                                                                        <textarea class="form-control form-control-sm" name="location_detail" id="location_detail" cols="30" rows="3">{{$location->location_detail}}</textarea>
+                                                                    <div class="modal-footer">
+                                                                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                                                                        <button class="btn btn-success" type="submit" name="location-update">Lưu</button>
                                                                     </div>
-                                                                </div>
+                                                                </form>
                                                             </div>
-                                                            <div class="modal-footer">
-                                                                <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
-                                                                <button class="btn btn-success" type="submit" name="location-update">Lưu</button>
-                                                            </div>
-                                                        </form>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        @endforeach
+                            @endforeach
+                        @endif
+                       
                         <div class="main-content container-fluid">
                             <div class="row">
                               <div class="col-12">
@@ -451,6 +533,61 @@
                 if (file) {
                     reader.readAsDataURL(file);
                 }
+            }
+        </script>
+    {{--  --}}
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+        <script>
+            const host = "https://provinces.open-api.vn/api/";
+            var callAPI = (api) => {
+                return axios.get(api)
+                    .then((response) => {
+                        renderData(response.data, "city");
+                    });
+            }
+            callAPI('https://provinces.open-api.vn/api/?depth=1');
+            var callApiDistrict = (api) => {
+                return axios.get(api)
+                    .then((response) => {
+                        renderData(response.data.districts, "district");
+                    });
+            }
+            var callApiWard = (api) => {
+                return axios.get(api)
+                    .then((response) => {
+                        renderData(response.data.wards, "ward");
+                    });
+            }
+            
+            var renderData = (array, select) => {
+                let row = ' <option disable value="">Chọn</option>';
+                array.forEach(element => {
+                    row += `<option data-id="${element.code}" value="${element.name}">${element.name}</option>`
+                });
+                document.querySelector("#" + select).innerHTML = row
+            }
+            
+            $("#city").change(() => {
+                callApiDistrict(host + "p/" + $("#city").find(':selected').data('id') + "?depth=2");
+                printResult();
+            });
+            $("#district").change(() => {
+                callApiWard(host + "d/" + $("#district").find(':selected').data('id') + "?depth=2");
+                printResult();
+            });
+            $("#ward").change(() => {
+                printResult();
+            })
+            
+            var printResult = () => {
+                if ($("#district").find(':selected').data('id') != "" && $("#city").find(':selected').data('id') != "" &&
+                    $("#ward").find(':selected').data('id') != "") {
+                    let result = $("#city option:selected").text() +
+                        " | " + $("#district option:selected").text() + " | " +
+                        $("#ward option:selected").text();
+                    $("#result").text(result)
+                }
+            
             }
         </script>
 @endsection

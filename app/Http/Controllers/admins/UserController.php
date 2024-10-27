@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\account\UserCreate;
 use App\Mail\MailRegister;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class UserController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(UserCreate $request)
     {
         //
         if($request->input('password-type')) {

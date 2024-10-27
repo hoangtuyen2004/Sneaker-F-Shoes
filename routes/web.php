@@ -22,10 +22,8 @@ Route::get('register', [AuthController::class, 'formRegister']);
 Route::post('register', [AuthController::class, 'register'])->name('register');
 Route::post('logout', [AuthController::class, 'logout'])->name('logout');
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('/');
 
-// Trang danh sách sản phẩm
-Route::resource('shop-product', App\Http\Controllers\clients\ShopController::class);
 
 
 Route::prefix('wp-admin')->as('wp-admin.')->middleware(CheckRoleAdminMiddleware::class)->group(function () {
@@ -53,3 +51,8 @@ Route::prefix('wp-admin')->as('wp-admin.')->middleware(CheckRoleAdminMiddleware:
     // Route size
     Route::resource('size', App\Http\Controllers\admins\SizeController::class);
 });
+
+// Trang danh sách sản phẩm
+Route::resource('shop-product', App\Http\Controllers\clients\ShopController::class);
+// Giỏ hàng
+Route::resource('card', App\Http\Controllers\clients\CardController::class);

@@ -633,7 +633,7 @@
                                     <label for="Image${index}" class="custom-file-upload">
                                         <i class="mdi mdi-collection-image-o"></i> Ảnh(3)
                                     </label>
-                                    <input onchange="loadIMG(${index})" type="file" id="Image${index}" name="image[${index}][]" multiple style="display: none;" accept="image/*"/>
+                                    <input onchange="loadIMG(${index})" type="file" id="Image${index}" name="image[${element}][]" multiple style="display: none;" accept="image/*"/>
                                 </div>
                             </td>`;
                     }else{

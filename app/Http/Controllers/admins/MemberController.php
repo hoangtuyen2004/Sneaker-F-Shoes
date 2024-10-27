@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admins;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\account\MemberCreate;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -33,7 +34,7 @@ class MemberController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(MemberCreate $request)
     {
         //
         try {
@@ -90,8 +91,16 @@ class MemberController extends Controller
     {
         //
         try {
+
             if($request->isMethod('PUT')) {
                 $user = User::query()->findOrFail($id);
+                if($request->input('location-create')) {
+                    $location = $request->only('user_name', 'phone_number', 'city_province', 'district', 'commune', 'location_detail');
+                    $location['location_name'] = "Thông tin liên hệ";
+                    $location['status'] = 1;
+                    $location_new = $user->location()->create($location);
+                    return back()->with('success', 'Cập nhật thông tin thành công!');
+                }
                 $data = $request->only('name', 'email', 'phone_number', 'birthday', 'gender', 'role', 'status');
                 if($request->hasFile('image')) {
                     if($user->image) {

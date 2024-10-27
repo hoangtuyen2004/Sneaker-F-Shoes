@@ -60,6 +60,7 @@
             text-align: center;
             align-content: center;
             padding-top: 1px;
+            border: 1px solid;
         }
         .labelColor i {
             /* display: none; */
@@ -168,120 +169,145 @@
                 @endif
             </div>
         </div>
+        <div class="modal fade" id="md-footer-danger" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <form action="{{ route('wp-admin.product.destroy',$product->id) }}" method="post" class="modal-content">
+                    @csrf
+                    @method('DELETE')
+                    <div class="modal-header">
+                        <button class="close" type="button" data-dismiss="modal" aria-hidden="true"><span class="mdi mdi-close"></span></button>
+                    </div>
+                    <div class="modal-body">
+                    <div class="text-center">
+                        <div class="text-danger"><span class="modal-main-icon mdi mdi-info-outline"></span></div>
+                        <h3>Thông báo!</h3>
+                        <p>Bạn có chắc muốn xóa sản phẩm : {{$product->name}}<br>khỏi danh sách sản phẩm.</p>
+                    </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Hủy</button>
+                        <button class="btn btn-danger" type="submit">Xóa</button>
+                    </div>
+                </form>
+            </div>
+        </div>
         <div class="main-content container-fluid">
-                <div class="row">{{---Sản phẩm---}}
-                    <div class="col-md-12">
-                        <div class="card card-contrast">
-                            <div class="card-header px-3 py-1 card-header-contrast card-header-featured" style="background-color: #FECBA1 !important;">
-                                <div class="d-flex" style="gap: 10px">
-                                    <a href="{{route('wp-admin.product.index')}}" class="btn btn-center btn-space btn-secondary btn-xs m-0">
-                                        <i class="icon mdi mdi-arrow-left"></i> Quay lại
-                                    </a>
-                                    <form action="" class="input-group" method="GET" style="width: 10%;">
-                                        @csrf
-                                        <input class="form-control form-control-xs" id="fillter" type="text" value="{{$product->id}}" name="id" placeholder="Mã sản phẩm">{{-- Đổi sản phẩm nhanh --}}
-                                        <button class="btn btn-space btn-secondary btn-xs m-0" type="submit">
-                                            <i class="icon mdi mdi-refresh"></i>
-                                        </button>
-                                    </form>
-                                    <a href="{{route('wp-admin.product.edit',$product->id)}}" class="btn btn-center btn-space btn-info btn-xs m-0">
-                                        <i class="icon mdi mdi-edit"></i> Sửa sản phẩm
-                                    </a>
-                                    @if ($product->status == "Đang bán")
-                                        <button class="btn btn-space btn-warning btn-xs m-0">
-                                            <i class="icon mdi mdi-info"></i> Dừng bán
-                                        </button>
-                                    @else
-                                        <button class="btn btn-space btn-success btn-xs m-0">
-                                            <i class="icon mdi mdi-check-circle"></i> Mở bán
-                                        </button>
-                                    @endif
-                                    <button class="btn btn-space btn-danger btn-xs m-0">
-                                        <i class="icon mdi mdi-delete"></i>
+            <div class="row">{{---Sản phẩm---}}
+                <div class="col-md-12">
+                    <div class="card card-contrast">
+                        <div class="card-header px-3 py-1 card-header-contrast card-header-featured" style="background-color: #FECBA1 !important;">
+                            <div class="d-flex" style="gap: 10px">
+                                <a href="{{route('wp-admin.product.index')}}" class="btn btn-center btn-space btn-secondary btn-xs m-0">
+                                    <i class="icon mdi mdi-arrow-left"></i> Quay lại
+                                </a>
+                                <form action="" class="input-group" method="GET" style="width: 10%;">
+                                    @csrf
+                                    <input class="form-control form-control-xs" id="fillter" type="text" value="{{$product->id}}" name="id" placeholder="Mã sản phẩm">{{-- Đổi sản phẩm nhanh --}}
+                                    <button class="btn btn-space btn-secondary btn-xs m-0" type="submit">
+                                        <i class="icon mdi mdi-refresh"></i>
                                     </button>
-                                </div>
+                                </form>
+                                <a href="{{route('wp-admin.product.edit',$product->id)}}" class="btn btn-center btn-space btn-info btn-xs m-0">
+                                    <i class="icon mdi mdi-edit"></i> Sửa sản phẩm
+                                </a>
+                                @if ($product->status == "Đang bán")
+                                    <button class="btn btn-space btn-warning btn-xs m-0">
+                                        <i class="icon mdi mdi-info"></i> Dừng bán
+                                    </button>
+                                @else
+                                    <button class="btn btn-space btn-success btn-xs m-0">
+                                        <i class="icon mdi mdi-check-circle"></i> Mở bán
+                                    </button>
+                                @endif
+                                <button class="btn btn-space btn-danger btn-xs m-0" data-toggle="modal" data-target="#md-footer-danger" type="button"><i class="icon mdi mdi-delete"></i></button>
                             </div>
-                            <div class="card-body">
-                                <div class="w-75 m-auto">
-                                    <div class="row">
-                                        <div class="col-6">
-                                            <div class="img-big">
-                                                <img class="w-100" src="https://i.pinimg.com/736x/09/da/58/09da58d375d51cff3455665307dd2bd1.jpg" alt="">
-                                            </div>
-                                            <div class="img-small row m-auto">
-                                                @foreach ($product->attribute as $attribute)
-                                                    @foreach ($attribute->url_image as $img)
-                                                        <img class="col p-0 m-3" src="{{Storage::url($img->url)}}" alt="">
-                                                    @endforeach
+                        </div>
+                        <div class="card-body">
+                            <div class="w-75 m-auto">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="img-big">
+                                            @foreach ($product->attribute as $key=>$attribute)
+                                                @foreach ($attribute->url_image as $i=>$img)
+                                                    @if ($key == 0 && $i == 0)
+                                                        <img class="w-100" src="{{Storage::url($img->url)}}" alt="">
+                                                    @endif
                                                 @endforeach
+                                            @endforeach
+                                        </div>
+                                        <div class="img-small row m-auto">
+                                            @foreach ($product->attribute as $attribute)
+                                                @foreach ($attribute->url_image as $img)
+                                                    <img class="col-3 p-3" src="{{Storage::url($img->url)}}" alt="">
+                                                @endforeach
+                                            @endforeach
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div>
+                                            <span class="text-secondary category">
+                                                {{$product->categorys->name}}
+                                            </span>
+                                        </div>
+                                        <h1 class="m-0"><strong>{{$product->name}}</strong></h2>
+                                        <div class="space m-5"></div>
+                                        <div>
+                                            <span class="price">{{$product->attribute()->min('price')}}</span><span class="VND">đ</span>
+                                            <span class="price"> - </span>
+                                            <span class="price">{{$product->attribute()->max('price')}}</span><span class="VND">đ</span>
+                                        </div>
+
+                                        <div class="attribute">
+                                            <div class="color row" style="align-items: baseline;">
+                                                <h6 class="col-2">Màu sắc:</h6>
+                                                <div class="col color-choose d-flex" style="align-items: center; gap: 10px;">
+                                                    @foreach ($product->attribute as $attribute)
+                                                        <div class="color-item">
+                                                            <label class="labelColor" for="IdColor" style="background-color: {{$attribute->colors->color_code}}">
+                                                                <i class="icon mdi mdi-check-circle"></i>
+                                                            </label>
+                                                            <input class="ColorInput" type="radio" value="{{$attribute->colors->id}}" name="Code" id="IdColor">
+                                                        </div>
+                                                    @endforeach
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="size row" style="align-items: baseline;">
+                                                <h6 class="col-2">kích thước</h6>
+                                                <div class="col size-choose d-flex" style="align-items: center;gap:10px;">
+                                                    @foreach ($product->attribute as $attribute)
+                                                        <div class="size-item">
+                                                            <label title="" class="labelSize" id="Sizelable1" for="IDSize1">{{$attribute->sizes->size_code}}</label>
+                                                            <input class="SizeInput" type="radio" name="size" id="IDSize1">
+                                                        </div>
+                                                    @endforeach
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="col-6">
-                                            <div>
-                                                <span class="text-secondary category">
-                                                    {{$product->categorys->name}}
-                                                </span>
+                                        <div class="space" style="margin: 10px"></div>
+                                        <div>
+                                            <p><span id="description">Số lượng</span>: {{$product->attribute->sum('quanlity')}}</p>
+                                        </div>
+                                        <div class="space" style="margin: 60px"></div>
+                                        <div class="tag">
+                                            <ul class="pd-tags p-0" style="list-style: none;">
+                                                <li><span>THƯƠNG HIỆU</span>: {{$product->trademarks->name}}</li>
+                                                <li><span>CHẤT LIỆU</span>: {{$product->materials->name}}</li>
+                                                <li><span>ĐẾ GIÀY</span>: {{$product->soles->name}}</li>
+                                            </ul>
+                                        </div>
+                                        <div class="space" style="margin: 60px"></div>
+                                        <div class="quantity">
+                                            <div class="pro-qty">
+                                                <span class="sub">-</span>
+                                                <input type="text" id="quality" value="1">
+                                                <span class="sub">+</span>
                                             </div>
-                                            <h1 class="m-0"><strong>{{$product->name}}</strong></h2>
-                                            <div class="space m-5"></div>
-                                            <div>
-                                                <span class="price">{{$product->attribute()->min('price')}}</span><span class="VND">đ</span>
-                                                <span class="price"> - </span>
-                                                <span class="price">{{$product->attribute()->max('price')}}</span><span class="VND">đ</span>
-                                            </div>
-
-                                            <div class="attribute">
-                                                <div class="color row" style="align-items: baseline;">
-                                                    <h6 class="col-2">Màu sắc:</h6>
-                                                    <div class="col color-choose d-flex" style="align-items: center; gap: 10px;">
-                                                        @foreach ($product->attribute as $attribute)
-                                                            <div class="color-item">
-                                                                <label class="labelColor" for="IdColor" style="background-color: {{$attribute->colors->color_code}}">
-                                                                    <i class="icon mdi mdi-check-circle"></i>
-                                                                </label>
-                                                                <input class="ColorInput" type="radio" value="{{$attribute->colors->id}}" name="Code" id="IdColor">
-                                                            </div>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                                
-                                                <div class="size row" style="align-items: baseline;">
-                                                    <h6 class="col-2">kích thước</h6>
-                                                    <div class="col size-choose d-flex" style="align-items: center;gap:10px;">
-                                                        @foreach ($product->attribute as $attribute)
-                                                                <div class="size-item">
-                                                                    <label title="" class="labelSize" id="Sizelable1" for="IDSize1">{{$attribute->sizes->size_code}}</label>
-                                                                    <input class="SizeInput" type="radio" name="size" id="IDSize1">
-                                                                </div>
-                                                        @endforeach
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="space" style="margin: 10px"></div>
-                                            <div>
-                                                <p><span id="description">Số lượng</span>: {{$product->attribute->sum('quanlity')}}</p>
-                                            </div>
-                                            <div class="space" style="margin: 60px"></div>
-                                            <div class="tag">
-                                                <ul class="pd-tags p-0" style="list-style: none;">
-                                                    <li><span>THƯƠNG HIỆU</span>: {{$product->trademarks->name}}</li>
-                                                    <li><span>CHẤT LIỆU</span>: {{$product->materials->name}}</li>
-                                                    <li><span>ĐẾ GIÀY</span>: {{$product->soles->name}}</li>
-                                                </ul>
-                                            </div>
-                                            <div class="space" style="margin: 60px"></div>
-                                            <div class="quantity">
-                                                <div class="pro-qty">
-                                                    <span class="sub">-</span>
-                                                    <input type="text" id="quality" value="1">
-                                                    <span class="sub">+</span>
-                                                </div>
-                                                <a href="#" class="primary-btn pd-cart">Add To Cart</a>
-                                            </div>
-                                            <div class="space" style="margin: 30px"></div>
-                                            <div class="description">
-                                                <p><span id="description">Mô tả</span>: {{$product->description}}</p>
-                                            </div>
+                                            <a href="#" class="primary-btn pd-cart">Add To Cart</a>
+                                        </div>
+                                        <div class="space" style="margin: 30px"></div>
+                                        <div class="description">
+                                            <p><span id="description">Mô tả</span>: {{$product->description}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -289,6 +315,7 @@
                         </div>
                     </div>
                 </div>
+            </div>
         </div>
     </div>
 @endsection
