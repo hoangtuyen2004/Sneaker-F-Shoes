@@ -56,3 +56,5 @@ Route::prefix('wp-admin')->as('wp-admin.')->middleware(CheckRoleAdminMiddleware:
 Route::resource('shop-product', App\Http\Controllers\clients\ShopController::class);
 // Giỏ hàng
 Route::resource('card', App\Http\Controllers\clients\CardController::class);
+// Thanh toán
+Route::resource('order', App\Http\Controllers\clients\OrderController::class);

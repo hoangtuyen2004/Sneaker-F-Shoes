@@ -20,14 +20,7 @@
             <ul>
                 <li><a href="/">Trang chủ</a></li>
                 <li><a href="{{ route('shop-product.index') }}">Sản phẩm</a></li>
-                <li><a href="#">Collection</a>
-                    <ul class="dropdown">
-                        <li><a href="#">Men's</a></li>
-                        <li><a href="#">Women's</a></li>
-                        <li><a href="#">Kid's</a></li>
-                    </ul>
-                </li>
-                <li><a href="./contact.html">Contact</a></li>
+                <li><a href="#">Tra cứu hóa đơn</a></li>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>

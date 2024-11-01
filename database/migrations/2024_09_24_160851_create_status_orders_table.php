@@ -17,9 +17,9 @@ return new class extends Migration
             $table->foreignId('statuses_id')->constrained('statuses')->onDelete('cascade');
             $table->string('name_status');//Tên trạng thái
             $table->dateTime('date_update');//Ngày cập nhật
-            $table->string('note',255);//Ghi chú
+            $table->string('note',255)->nullable();//Ghi chú
             $table->foreignId('orders_id')->constrained('orders')->onDelete('cascade');//Mã hóa đơn
-            $table->foreignId('users_id')->constrained('users')->onDelete('cascade');//Nhân viên xác nhận
+            $table->foreignId('users_id')->nullable()->constrained('users')->onDelete('cascade');//Nhân viên xác nhận
             $table->timestamps();//Ngày tạo
         });
     }

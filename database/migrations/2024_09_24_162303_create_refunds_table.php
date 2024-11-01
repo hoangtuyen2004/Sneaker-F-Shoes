@@ -14,7 +14,6 @@ return new class extends Migration
         // Danh sách hoàn hàng
         Schema::create('refunds', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('products_id')->constrained('products')->onDelete('cascade');//Mã sản phẩm
             $table->foreignId('attributes_id')->constrained('attributes')->onDelete('cascade');//Mã biến thể
             $table->string('product_name',255);//Tên sản phẩm
             $table->string('color_name',255);//Tên màu sắc

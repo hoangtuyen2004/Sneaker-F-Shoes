@@ -19,7 +19,7 @@ return new class extends Migration
             $table->enum('trading',['Thanh toán', 'Hoàn tiền']);//Loại giao dịch
             $table->enum('payment_method',['Tiền mặt', 'Chuyển khoản']);//Phương thức thanh toán
             $table->string('note',255)->nullable();//Ghi chú
-            $table->foreignId('users_id')->constrained('users')->onDelete('cascade');//Nhân viên xác nhận
+            $table->foreignId('users_id')->nullable()->constrained('users')->onDelete('cascade');//Nhân viên xác nhận
             $table->timestamps();//Ngày tạo
         });
     }

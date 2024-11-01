@@ -133,7 +133,6 @@
     <script src="{{ asset('assets/clients/js/jquery.slicknav.js') }}"></script>
     <script src="{{ asset('assets/clients/js/owl.carousel.min.js') }}"></script>
     <script src="{{ asset('assets/clients/js/main.js') }}"></script>
-
     <script src="https://kit.fontawesome.com/2e8884d211.js" crossorigin="anonymous"></script>
     @yield('js')
 </body>

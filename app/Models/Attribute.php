@@ -35,6 +35,10 @@ class Attribute extends Model
         return $this->belongsTo(Size::class);
     }
     public function cart() {
-        return $this->belongsToMany(Cart::class);
+        return $this->hasMany(Cart::class, 'attributes_id');
+    }
+    public function product_lists()
+    {
+        return $this->hasMany(Product_list::class);
     }
 }

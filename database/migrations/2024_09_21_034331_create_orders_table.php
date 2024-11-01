@@ -14,8 +14,7 @@ return new class extends Migration
         //Bảng đặt hàng
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('order_code',10);//Mã hóa đơn
-            $table->dateTime('date_create');//Ngày tạo đơn
+            $table->string('order_code',50);//Mã hóa đơn
             $table->foreignId('users_id')->nullable()->constrained('users')->onDelete('cascade');//Mã khách hàng
             $table->string('recipient_name',255);//Tên người nhận
             $table->string('phone_number',20);

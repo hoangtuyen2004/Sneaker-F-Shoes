@@ -3,9 +3,12 @@
 namespace App\Http\Controllers\clients;
 
 use App\Http\Controllers\Controller;
+use App\Models\Attribute as ModelsAttribute;
+use App\Models\Cart;
 use App\Models\Color;
 use App\Models\Product;
 use App\Models\Size;
+use App\Models\Voucher;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -19,12 +22,21 @@ class CardController extends Controller
         //
         $data['total'] = 0;
         $data['subTotal'] = 0;
-        $data['cart'] = session()->get('cart', []);
-
-        foreach ($data['cart'] as $key => $item) {
-            $data['subTotal'] += $item['price'] * $item['quantity'];
-            $data['voucher'] = 0;
-            $data['total'] = $data['subTotal'] - $data['voucher'];
+        $data['voucher'] = 0;
+        $data['attributes'] = ModelsAttribute::all();
+        if(!Auth::user()) {
+            $data['cart'] = session()->get('cart', []);
+            foreach ($data['cart'] as $key => $item) {
+                $data['subTotal'] += ($item['price'] * $item['quantity']);
+                $data['total'] = $data['subTotal'] - $data['voucher'];
+            }
+        }
+        else {
+            $data['cart'] = Auth::user()->cart->all();
+            foreach ($data['cart'] as $key =>$item) {
+                $data['subTotal'] += ($item['price'] * $item['quantity']);
+                $data['total'] = $data['subTotal'] - $data['voucher'];
+            }
         }
         return view('clients.cart.index', $data);
     }
@@ -52,28 +64,46 @@ class CardController extends Controller
         if(!$quantity) {
             $quantity = 1;
         }
-        // Khỏi tạo một mảng chứa thông tin giỏ hàng
-        $cart = session()->get('cart',[]);
-        if(isset($cart[$attribute->id])) {
-            // Sản phẩm đã tồn tại
-            $cart[$attribute->id]['quantity'] += $quantity;
+        if(Auth::user()) {
+            $carts = Cart::where('users_id', '=', Auth::user())->orwhere('attributes_id', '=', $attribute->id)->first();
+            if($carts) {
+                // Sản phẩm đã có trong giỏ hàng
+               $data['quanlity'] = $carts->quanlity+$quantity;
+               $carts->update($data);
+            }
+            else {
+                Cart::query()->create([
+                    'users_id'=>Auth::user()->id,
+                    'attributes_id'=>$attribute->id,
+                    'quanlity'=>$quantity,
+                ]);
+            }
+            return back();
         }
         else {
-            // Sản phẩm chưa có 
-            $cart[$attribute->id] = [
-                'attribute_id' => $attribute->id,
-                'name' => $product->name,
-                'color' => $color->name,
-                'size' => $size->name,
-                'quantity' => $quantity,
-                'price' => $attribute->price,
-            ];
-            foreach ($attribute->url_image as $key=>$img) {
-                $cart[$attribute->id]['img'][$key] = $img->url;
+            $cart = session()->get('cart',[]);
+            if(isset($cart[$attribute->id])) {
+                // Sản phẩm đã tồn tại
+                $cart[$attribute->id]['quantity'] += $quantity;
             }
+            else {
+                // Sản phẩm chưa có 
+                $cart[$attribute->id] = [
+                    'attribute_id' => $attribute->id,
+                    'name' => $product->name,
+                    'color' => $color->name,
+                    'size' => $size->name,
+                    'quantity' => $quantity,
+                    'price' => $attribute->price,
+                ];
+                foreach ($attribute->url_image as $key=>$img) {
+                    $cart[$attribute->id]['img'][$key] = $img->url;
+                }
+            }
+            session()->put('cart',$cart);
+            return back()->with('success', "Thêm giỏ thành công!");
         }
-        session()->put('cart',$cart);
-        return back()->with('success', "Thêm giỏ thành công!");
+
     }
 
     /**
@@ -100,8 +130,18 @@ class CardController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        abort(404);
-
+        if(!Auth::user()) {
+            $cart = session()->get('cart');
+            $cart[$id]['quantity'] = $request->input('quantity');
+            session()->put('cart',$cart);
+            return back();
+        }
+        else {
+            $cart = Cart::query()->findOrFail($id);
+            dd($cart);
+            $quantity = $cart->quanlity;
+            $data = ['quanlity'=>$quantity];
+        }
     }
 
     /**
@@ -111,16 +151,29 @@ class CardController extends Controller
     {
         //
         try {
-            if($request->isMethod('PUT')) {
-                if($request->only('delete_Pr')) {
-                    $cart = session()->get('cart');
-                    $attribute_id = $id;
-            
-                    $cart = collect($cart)->reject(function ($item) use ($attribute_id) {
-                        return $item['attribute_id'] == $attribute_id;
-                    })->toArray();
-                    session()->put('cart', $cart);
-                    return back()->with('Xóa sản phẩm thành công!');
+            if ($request->isMethod('DELETE')) {
+                if(Auth::user()) {
+                    $cart = Cart::query()->findOrFail($id);
+                    $cart->delete();
+                    $data['cart'] = Auth::user()->cart->all();
+                    foreach ($data['cart'] as $key =>$item) {
+                        $data['subTotal'] += $item['price'] * $item['quantity'];
+                        $data['total'] = $data['subTotal'] - $data['voucher'];
+                        $data['message'] = "Xóa thành công!";
+                    }
+                    return back();
+                }
+                else {
+                    if($request->only('delete_Pr')) {
+                        $cart = session()->get('cart');
+                        $attribute_id = $id;
+                
+                        $cart = collect($cart)->reject(function ($item) use ($attribute_id) {
+                            return $item['attribute_id'] == $attribute_id;
+                        })->toArray();
+                        session()->put('cart', $cart);
+                        return back()->with('Xóa sản phẩm thành công!');
+                    }
                 }
             }
         } catch (\Throwable $th) {

@@ -15,9 +15,9 @@ class Cart extends Model
         'quanlity',
     ];
     public function users() {
-        return $this->belongsToMany(User::class);
+        return $this->belongsTo(User::class,'users_id');
     }
     public function attributes() {
-        return $this->belongsToMany(Attribute::class);
+        return $this->belongsTo(Attribute::class, 'attributes_id');
     }
 }

@@ -36,52 +36,80 @@
         <div class="row">
             <div class="col-lg-2 col-md-2">
                 <div class="logo">
-                    <a href="./index.html">
-                        <img src="{{ asset('assets/clients/img/logo.png') }}" alt="">
+                    <a href="/">
+                        <img src="{{ asset('assets/admins/img/logo-xx.png') }}" alt="">
                     </a>
                 </div>
             </div>
             <div class="col-lg-7 col-md-7">
-                <div class="advanced-search">
-                    <button type="button" class="category-btn">All Categories</button>
+                <div class="advanced-search d-flex justify-content-between">
+                    <button type="button" class="category-btn">Tất cả</button>
                     <div class="input-group">
-                        <input type="text" placeholder="What do you need?">
+                        <input type="text" placeholder="Bạn cần gì?">
                         <button type="button"><i class="ti-search"></i></button>
                     </div>
                 </div>
             </div>
             <div class="col-lg-3 text-right col-md-3">
                 <ul class="nav-right">
-                    <li class="heart-icon">
-                        <a href="#">
-                            <i class="icon_heart_alt"></i>
-                            <span>1</span>
-                        </a>
-                    </li>
                     <li class="cart-icon">
                         <a href="{{ route('card.index') }}">
                             <i class="icon_bag_alt"></i>
-                            <span>{{ session('cart') ? count(session('cart')) : "0" }}</span>
+                            <span>
+                                @if (!Auth::user())
+                                    @if (session()->get('cart'))
+                                        {{count(session('cart'))}}
+                                    @else
+                                        0
+                                    @endif
+                                @else
+                                    {{ count(Auth::user()->cart) }}
+                                @endif
+                            </span>
                         </a>
                         <div class="cart-hover">
                             <div class="select-items">
                                 <table>
                                     <tbody>
-                                        @if (session('cart'))
-                                            @foreach (session('cart') as $cart)
+                                        @if (!Auth::user())
+                                            @if (session('cart'))
+                                                @foreach (session('cart') as $cart)
+                                                    <tr>
+                                                        <td class="si-pic"><img src="{{ Storage::url($cart['img'][0]) }}" width="70px" height="70px" style="object-fit: cover;" alt=""></td>
+                                                        <td class="si-text">
+                                                            <div class="product-selected">
+                                                                <p>₫{{number_format($cart['price'],0,'','.')}} x {{$cart['quantity']}}</p>
+                                                                <h6>{{$cart['name']}}</h6>
+                                                                <div style="font-size: 12px;color:gray;"><span>{{$cart['color']}}</span>-<span>{{$cart['size']}}</span></div>
+                                                            </div>
+                                                        </td>
+                                                        <td class="si-close">
+                                                            <form action="{{ route('card.update',$cart['attribute_id']) }}" method="post">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <button type="submit" name="delete_Pr" value="true" class="btn p-0">
+                                                                    <i class="ti-close"></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endif
+                                        @else
+                                            @foreach (Auth::user()->cart as $cart)
                                                 <tr>
-                                                    <td class="si-pic"><img src="{{ Storage::url($cart['img'][0]) }}" width="70px" height="70px" style="object-fit: cover;" alt=""></td>
+                                                    <td class="si-pic"><img src="{{ Storage::url($cart->attributes->url_image[0]->url) }}" width="70px" height="70px" style="object-fit: cover;" alt=""></td>
                                                     <td class="si-text">
                                                         <div class="product-selected">
-                                                            <p>₫{{number_format($cart['price'],0,'','.')}} x {{$cart['quantity']}}</p>
-                                                            <h6>{{$cart['name']}}</h6>
-                                                            <div style="font-size: 12px;color:gray;"><span>{{$cart['color']}}</span>-<span>{{$cart['size']}}</span></div>
+                                                            <p>₫{{number_format($cart->attributes->price,0,'','.')}} x {{$cart->quanlity}}</p>
+                                                            <h6>{{$cart->attributes->product->name}}</h6>
+                                                            <div style="font-size: 12px;color:gray;"><span>{{$cart->attributes->colors->name}}</span>-<span>{{$cart->attributes->sizes->name}}</span></div>
                                                         </div>
                                                     </td>
                                                     <td class="si-close">
-                                                        <form action="{{ route('card.update',$cart['attribute_id']) }}" method="post">
+                                                        <form action="{{ route('card.destroy',$cart->id) }}" method="post">
                                                             @csrf
-                                                            @method('PUT')
+                                                            @method('DELETE')
                                                             <button type="submit" name="delete_Pr" value="true" class="btn p-0">
                                                                 <i class="ti-close"></i>
                                                             </button>
@@ -107,13 +135,19 @@
                                             echo number_format($total,0,' ','.')."₫";
                                         @endphp
                                     @else
-                                        0₫
+                                        @php
+                                            $total = 0;
+                                            foreach (Auth::user()->cart as $cart) {
+                                                $total += $cart->attributes->price*$cart->quanlity;
+                                            }
+                                            echo number_format($total,0,' ','.')."₫";
+                                        @endphp
                                     @endif
                                 </h5>
                             </div>
                             <div class="select-button">
                                 <a href="{{ route('card.index') }}" class="primary-btn view-card">Xem Giỏ</a>
-                                <a href="#" class="primary-btn checkout-btn">Thanh Toán</a>
+                                <a href="{{ route('order.index') }}" class="primary-btn checkout-btn">Thanh Toán</a>
                             </div>
                         </div>
                     </li>

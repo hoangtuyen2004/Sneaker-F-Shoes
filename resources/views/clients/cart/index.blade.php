@@ -4,6 +4,7 @@
 @endsection
 @section('css')
     {{-- CSS --}}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.4/toastr.min.css">
     <style>
         .cart-pic img {
             max-width: 170px;
@@ -37,71 +38,135 @@
             <div class="row">
                 <div class="col-lg-12">
                     <div class="cart-table">
-                        <form id="cartForm" method="post">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Ảnh</th>
-                                        <th class="p-name">Tên sản phẩm</th>
-                                        <th>Giá</th>
-                                        <th>Số lượng</th>
-                                        <th>Tổng</th>
-                                        <th>Xóa</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="cart">
-                                    @foreach ($cart as $key=>$item)
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Ảnh</th>
+                                    <th class="p-name">Tên sản phẩm</th>
+                                    <th>Giá</th>
+                                    <th>Số lượng</th>
+                                    <th>Tổng</th>
+                                    <th>Xóa</th>
+                                </tr>
+                            </thead>
+                            <tbody class="cart">
+                                @foreach ($cart as $key=>$element)
+                                @foreach ($attributes as $attribute)
+                                    @if (Auth::user())
+                                        @if ($attribute->id === $element->attributes_id)
                                         <tr>
-                                            <td class="cart-pic first-row"><img src="{{ Storage::url($item['img'][0]) }}" alt=""></td>
+                                            <td class="cart-pic first-row"><img src="{{ Storage::url($attribute->url_image[0]->url) }}" alt=""></td>
                                             <td class="cart-title first-row">
-                                                <h5>{{$item['name']}}</h5><input type="hidden" name="attribute_id" id="attribute_id" value="{{ $item['attribute_id'] }}">
+                                                <h5>{{$attribute->product->name}}</h5>
                                                 <div class="attribute">
-                                                    <span>Màu: {{$item['color']}}</span> | <span>Size: {{$item['size']}}</span>
+                                                    <span>Màu: {{$attribute->colors->name}}</span> | <span>Size: {{$attribute->sizes->name}}</span>
                                                 </div>
                                             </td>
-                                            <td class="p-price first-row">₫{{number_format($item['price'],0,'','.')}}</td>
+                                            <td class="p-price first-row">₫{{number_format($attribute->price,0,'','.')}}</td>
                                             <td class="qua-col first-row">
                                                 <div class="quantity">
-                                                    <div class="pro-qty">
-                                                        <input class="quantityInput" type="text" name="quantity" data-price="{{$item['price']}}" value="{{$item['quantity']}}">
-                                                    </div>
+                                                    <form action="{{ route('card.update',$element->id) }}" method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="pro-qty">
+                                                            <button type="submit" name="giam" class="dec qtybtn btn m-0 p-0">-</button>
+                                                            <input class="quantityInput" type="text" name="cart[{{$key}}][quantity]" data-price="{{$attribute->price}}" value="{{$element->quanlity}}">
+                                                            <button type="submit" name="tang" class="inc qtybtn btn m-0 p-0">+</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </td>
-                                            <td class="total-price first-row sub-Total">₫{{number_format(($item['price']*$item['quantity']),0,'','.')}}</td>
-                                            <td class="close-td first-row"><i class="ti-close"></i></td>
+                                            <td class="total-price first-row sub-Total">₫{{number_format(($element->quanlity*$attribute->price),0,'','.')}}</td>
+                                            <td class="close-td first-row">
+                                                <form action="{{ route('card.destroy',$element->id) }}" method="post">
+                                                    @csrf
+                                                    @method('delete')
+                                                    <button type="submit" class="remove-cart btn m-0 p-0"><i class="ti-close"></i></button>
+                                                </form>
+                                            </td>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </form>
+                                        @endif
+                                    @else
+                                        @if ($attribute->id === $element['attribute_id'])
+                                        <tr>
+                                            <td class="cart-pic first-row"><img src="{{ Storage::url($attribute->url_image[0]->url) }}" alt=""></td>
+                                            <td class="cart-title first-row">
+                                                <h5>{{$attribute->product->name}}</h5>
+                                                <div class="attribute">
+                                                    <span>Màu: {{$attribute->colors->name}}</span> | <span>Size: {{$attribute->sizes->name}}</span>
+                                                </div>
+                                            </td>
+                                            <td class="p-price first-row">₫{{number_format($attribute->price,0,'','.')}}</td>
+                                            <td class="qua-col first-row">
+                                                <div class="quantity">
+                                                    <form action="{{ route('card.update',$element['attribute_id']) }}" method="post">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="pro-qty">
+                                                            <button type="submit" name="giam" class="dec qtybtn btn m-0 p-0">-</button>
+                                                            <input class="quantityInput" type="text" name="quantity" data-price="{{$attribute->price}}" value="{{$element['quantity']}}">
+                                                            <button type="submit" name="tang" class="inc qtybtn btn m-0 p-0">+</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </td>
+                                            <td class="total-price first-row sub-Total">₫{{number_format(($element['quantity']*$attribute->price),0,'','.')}}</td>
+                                            <td class="close-td first-row">
+                                                <form action="{{ route('card.destroy',$element['attribute_id']) }}" method="post">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button type="submit" name="delete_Pr" class="remove-cart btn m-0 p-0"><i class="ti-close"></i></button>
+                                                </form>
+                                            </td>
+                                        </tr>
+                                        @endif   
+                                    @endif
+                                @endforeach
+                                @endforeach
+                            </tbody>
+                        </table>
                     </div>
                     <div class="row">
                         <div class="col-lg-4">
                             <div class="cart-buttons">
-                                <button class="primary-btn continue-shop">Tiếp tục mua sắm</button>
-                                <button id="saveCart" class="primary-btn up-cart">Lưu giỏ</button>
+                                <button type="button" class="primary-btn continue-shop">Tiếp tục mua sắm</button>
+                                <button id="saveCart" type="submit" class="primary-btn up-cart">Lưu giỏ</button>
                             </div>
                             <div class="discount-coupon">
-                                <h6>Mã giảm giá</h6>
-                                <form action="#" class="coupon-form">
-                                    <input type="text" placeholder="Điền mã">
-                                    <button type="submit" class="site-btn coupon-btn">Áp dụng</button>
-                                </form>
+                                {{-- <h6>Mã giảm giá</h6>
+                                <form action="{{ route('card.index') }}" class="coupon-form" method="post">
+                                    @csrf
+                                    <input type="text" name="voucher_code" placeholder="Điền mã">
+                                    @if (Auth::user())
+                                        <button type="button" class="site-btn coupon-btn">Áp dụng</button>
+                                    @else
+                                        <button type="button" id="addCupon" class="site-btn coupon-btn">Áp dụng</button>
+                                    @endif
+                                </form> --}}
                             </div>
                         </div>
                         <div class="col-lg-4 offset-lg-4">
-                            <div class="proceed-checkout">
+                            <form action="{{ route('order.index') }}" class="proceed-checkout">
                                 <ul>
                                     <li class="subtotal">Tổng cộng
                                         <span class="subTotal">{{ number_format($subTotal,0,' ','.')."₫" }}</span>
                                     </li>
-                                    <li class="subtotal">Giảm giá <span class="voucher">{{ number_format($voucher,0,' ','.')."₫" }}</span></li>
-                                    <li class="cart-total">Tổng 
+                                    <li class="subtotal">
+                                        Giảm giá <span class="voucher">{{ number_format($voucher,0,' ','.')."₫" }}</span>
+                                        @if ($voucher != 0)
+                                            <input type="hidden" name="voucher_id" value="{{ $cp->id }}">
+                                        @endif
+                                    </li>
+                                    <li class="cart-total">Tổng     
                                         <span class="total">{{ number_format($total,0,' ','.')."₫" }}</span>
                                     </li>
                                 </ul>
-                                <a href="#" class="proceed-btn">Thanh toán</a>
-                            </div>
+                                @if (!Auth::user())
+                                    <button type="submit" @if(session('cart')=="") id="disl" @endif class="proceed-btn w-100">Đến trang thanh toán</button>
+                                @else
+                                <button type="submit" class="proceed-btn w-100">Đến trang thanh toán</button>                               
+                                @endif
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -130,10 +195,9 @@
                     })
                 }
                 var proQty = $('.pro-qty');
-                proQty.prepend('<span class="dec qtybtn">-</span>');
-                proQty.append('<span class="inc qtybtn">+</span>');
                 proQty.on('click', '.qtybtn', function () {
                     var $button = $(this);
+                    var url = $(this).attr('data-url');
                     var $input =  $button.parent().find('input');
                     var oldValue = $button.parent().find('input').val();
                     if ($button.hasClass('inc')) {
@@ -147,7 +211,7 @@
                         }
                     }
                     $input.val(newVal);
-
+                    
                     var price = parseFloat($input.data('price'));
                     var subTotalElement = $input.closest('tr').find('.sub-Total');
                     var newSubtotal = newVal * price;
@@ -170,20 +234,19 @@
 
                 })
                 // Xóa sản phẩm trong giỏ hàng
-                $('.close-td').on('click', function () {
-                    event.preventDefault();
-                    var $row = $(this).closest('tr');
-                    $row.remove()
-                    updateTotal();
-                });
+                
                 updateTotal()
         </script>
-    {{-- Gủi form --}}
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    {{-- Sử lý ajax --}}
         <script>
-            $('#saveCart').click(function(event) {
-            event.preventDefault();
-                const form = document.querySelector('#cartForm');
-            });
-            
+            $('#addCupon').on('click', function(e) {
+                swal("Thông báo!", "Cần đăng nhập để sử dụng tính năng này!", "warning");
+                return false;
+            })
+            $('#disl').on('click', function(e) {
+                swal("Thông báo!", "Giỏ hàng trống!", "warning");
+                return false;
+            })
         </script>
 @endsection

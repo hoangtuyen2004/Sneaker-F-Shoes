@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Mail\MailRegister;
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -27,6 +28,12 @@ class AuthController extends Controller
         if ($user && !Hash::check($account['password'], $user->password)) {
             Auth::login($user);
             if(Auth::user()->role === "Khách hàng") {
+                if(session('cart')) {
+                    foreach (session('cart') as $item) {
+                        Cart::query()->create(['users_id'=>Auth::user()->id, 'attributes_id'=>$item['attribute_id'], 'quanlity'=>$item['quantity']]);
+                    }
+                    session()->forget('cart');
+                }
                 return redirect()->intended('/'); 
             }
             elseif (Auth::user()->role === "Quản lý" || Auth::user()->role === "Nhân viên") {

@@ -177,10 +177,6 @@
                                                     <input type="hidden" name="id" value="{{$product->id}}">
                                                 @endforeach
                                             @endforeach
-                                            <div class="sale pp-sale">Sale</div>
-                                            <div class="icon">
-                                                <i class="icon_heart_alt"></i>
-                                            </div>
                                             <ul>
                                                 <li class="w-icon active">
                                                     <a>
