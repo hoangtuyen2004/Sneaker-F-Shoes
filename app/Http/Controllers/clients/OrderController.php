@@ -78,27 +78,57 @@ class OrderController extends Controller
                 $data['order_type'] = "Đơn online";
                 $data['total'] = 0;
                 $data['coin'] = 0;
-                foreach ($cart as $key => $item) {
-                    $data['total'] += ($item['price'] * $item['quantity']);
-                    $data['coin'] = $data['total'] - $data['coupons_value'];
+                if(!Auth::user()) {
+                    foreach ($cart as $key => $item) {
+                        $data['total'] += ($item['price'] * $item['quantity']);
+                        $data['coin'] = $data['total'] - $data['coupons_value'];
+                    }
                 }
-                $order = Order::query()->create($data);
+                else {
+                    foreach (Auth::user()->cart as $cart) {
+                        $data['total'] += ($cart->attributes->price * $cart->quanlity);
+                        $data['coin'] = $data['total'] - $data['coupons_value'];
+                    }
+                }
+                if(!Auth::user()) {
+                    $order = Order::query()->create($data);
+                }
+                else {
+                    $order = Auth::user()->orders()->create($data);
+                }
                 // Danh sách sản phẩm
-                $attbutes = Attribute::query()->get();
-                foreach ($attbutes as $attbute) {
-                    foreach ($cart as $item) {
-                        if($attbute->id == $item['attribute_id']) {
-                            $atr = [
-                                'attributes_id' => $attbute->id,
-                                'product_name' => $attbute->product->name,
-                                'color_name' => $attbute->colors->name,
-                                'size_name' => $attbute->sizes->name,
-                                'price' => $attbute->price,
-                                'quanlity' => $item['quantity'],
-                                'coin' => ($attbute->price*$item['quantity']),
-                            ];
-                            $order->product_lists()->create($atr);
+                if(!Auth::user()) {
+                    $attbutes = Attribute::query()->get();
+                    foreach ($attbutes as $attbute) {
+                        foreach ($cart as $item) {
+                            if($attbute->id == $item['attribute_id']) {
+                                $atr = [
+                                    'attributes_id' => $attbute->id,
+                                    'product_name' => $attbute->product->name,
+                                    'color_name' => $attbute->colors->name,
+                                    'size_name' => $attbute->sizes->name,
+                                    'price' => $attbute->price,
+                                    'quanlity' => $item['quantity'],
+                                    'coin' => ($attbute->price*$item['quantity']),
+                                ];
+                                $order->product_lists()->create($atr);
+                            }
                         }
+                    }
+                }
+                else {
+                    foreach (Auth::user()->cart as $cart) {
+                        $atr = [
+                            'attributes_id' => $cart->attributes->id,
+                            'product_name' => $cart->attributes->product->name,
+                            'color_name' => $cart->attributes->colors->name,
+                            'size_name' => $cart->attributes->sizes->name,
+                            'price' => $cart->attributes->price,
+                            'quanlity' => $cart->quanlity,
+                            'coin' => ($cart->attributes->price*$cart->quanlity),
+                        ];
+                        $order->product_lists()->create($atr);
+                        $cart->delete();
                     }
                 }
                 // Trạng thái

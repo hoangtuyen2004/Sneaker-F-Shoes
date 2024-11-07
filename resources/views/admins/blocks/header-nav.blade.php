@@ -33,13 +33,13 @@
                             <div class="user-position online">{{Auth::user()->role}}</div>
                         </div>
                         <a class="dropdown-item" href="pages-profile.html"><span class="icon mdi mdi-face"></span>Tài khoản</a>
-                                <a class="dropdown-item" href="#"><span class="icon mdi mdi-settings"></span>Cài đặt</a>
-                                <a class="dropdown-item" href="">
-                                    <form class="p-0 m-0" method="POST" action="{{ route('logout') }}">
-                                        @csrf
-                                        <button id="logout" class="btn p-0 m-0"><span class="icon mdi mdi-power"></span>Đăng xuất </button>
-                                    </form>    
-                                </a>
+                        <a class="dropdown-item" href="#"><span class="icon mdi mdi-settings"></span>Cài đặt</a>
+                        <a class="dropdown-item" href="">
+                            <form class="p-0 m-0" method="POST" action="{{ route('logout') }}">
+                                @csrf
+                                <button id="logout" class="btn p-0 m-0"><span class="icon mdi mdi-power"></span>Đăng xuất </button>
+                            </form>    
+                        </a>
                     </div>
                 </li>
             </ul>

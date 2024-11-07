@@ -27,6 +27,6 @@ class Product_list extends Model
     }
     public function attribute() 
     {
-        return $this->belongsToMany(Attribute::class)->onDelete('set null');
+        return $this->belongsTo(Attribute::class, 'attributes_id');
     }
 }

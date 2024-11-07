@@ -22,7 +22,7 @@
                             </ul>
                         </li>
                         <li class="parent">
-                            <a href="">
+                            <a href="{{ route('wp-admin.order.index') }}">
                                 <i class="icon mdi mdi-book"></i><span>Quản lý hóa đơn</span>
                             </a>
                         </li>

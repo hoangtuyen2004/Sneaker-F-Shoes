@@ -27,9 +27,9 @@ class Order extends Model
         'coin',
         'order_type',
     ];
-    public function user()
+    public function users()
     {
-        return $this->belongsTo(User::class)->onDelete('set null');;
+        return $this->belongsTo(User::class);
     }
     public function voucher() {
         return $this->belongsTo(Voucher::class);
@@ -40,7 +40,7 @@ class Order extends Model
     }
     public function payment()
     {
-        return $this->belongsToMany(Payment::class, 'payments');
+        return $this->hasMany(Payment::class, 'orders_id');
     }
     public function status_orders()
     {
