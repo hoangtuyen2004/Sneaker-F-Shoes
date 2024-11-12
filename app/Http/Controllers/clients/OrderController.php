@@ -7,6 +7,8 @@ use App\Models\Attribute;
 use App\Models\Cart;
 use App\Models\Location;
 use App\Models\Order;
+use App\Models\Status;
+use App\Models\Status_order;
 use DateTime;
 use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
@@ -52,6 +54,7 @@ class OrderController extends Controller
     public function create()
     {
         //
+        abort(404);
     }
 
     /**
@@ -76,6 +79,7 @@ class OrderController extends Controller
                     $data['coupons_value'] = 0;
                 }
                 $data['order_type'] = "Đơn online";
+                $data['payment_method'] = "Thanh toán khi nhận hàng";
                 $data['total'] = 0;
                 $data['coin'] = 0;
                 if(!Auth::user()) {
@@ -152,7 +156,8 @@ class OrderController extends Controller
     public function show(string $id)
     {
         //
-        abort(404);
+        $data['order'] = Order::findOrFail($id);
+        return view('clients.auth.detail',$data);
     }
 
     /**
@@ -170,7 +175,23 @@ class OrderController extends Controller
     public function update(Request $request, string $id)
     {
         //
-        abort(404);
+        $order = Order::query()->where('users_id', '=', Auth::user()->id)->find($id);
+        $status = Status::query()->where('name', '=', "Đã hủy")->first();
+        $data = [
+            "statuses_id"=>$status->id,
+            "name_status"=>$status->name,
+            "date_update"=>date('Y-m-d H:i:s'),
+            "note"=>"Bạn đã hủy đơn",
+            "orders_id"=>$order->id,
+            "users_id"=>Auth::user()->id,
+        ];
+        Status_order::query()->create($data);
+        return response()->json(
+            [
+                'status'=>200,
+                'message'=>'Hủy đơn thành công'
+            ]
+        );
     }
 
     /**

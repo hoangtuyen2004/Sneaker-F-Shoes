@@ -26,6 +26,7 @@ class Order extends Model
         'ship',
         'coin',
         'order_type',
+        'payment_method',
     ];
     public function users()
     {

@@ -2,8 +2,7 @@
     <div class="container">
         <div class="ht-left">
             <div class="mail-service">
-                <i class=" fa fa-envelope"></i>
-                hello.colorlib@gmail.com
+                <marquee>Chào mừng bạn đến với F shop !</marquee>
             </div>
             <div class="phone-service">
                 <i class=" fa fa-phone"></i>
@@ -13,7 +12,7 @@
         <div class="ht-right">
             @if (Auth::user())
                 <div class="login-panel d-flex" style="align-items: center !important;">
-                    <a href="#" class="text-dark"><i class="fa fa-user"></i> {{Auth::user()->name}}</a>
+                    <a href="{{ route('wp-client.my-account') }}" class="text-dark"><i class="fa fa-user"></i> {{Auth::user()->name}}</a>
                     <form action="{{ route('logout') }}" method="POST" class="mx-3">
                         @csrf
                         <button type="submit" class="btn m-0 p-0"><i class="fa-solid fa-right-from-bracket"></i></button>

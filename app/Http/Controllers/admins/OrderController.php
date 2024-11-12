@@ -29,7 +29,7 @@ class OrderController extends Controller
     public function create()
     {
         //
-        dd("Đâu là trang create");
+        abort(404);
     }
 
     /**
@@ -38,7 +38,7 @@ class OrderController extends Controller
     public function store(Request $request)
     {
         //
-        dd("Đâu là trang thêm mới");
+        abort(404);
     }
 
     /**
@@ -57,7 +57,7 @@ class OrderController extends Controller
     public function edit(string $id)
     {
         //
-        dd("Đâu là trang sửa");
+        abort(404);
     }
 
     /**
@@ -146,6 +146,6 @@ class OrderController extends Controller
     public function destroy(string $id)
     {
         //
-        dd("Đâu là trang xóa");
+        abort(404);
     }
 }

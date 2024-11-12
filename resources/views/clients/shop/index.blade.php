@@ -25,48 +25,23 @@
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
                     <div class="filter-widget">
-                        <h4 class="fw-title">Categories</h4>
+                        <h4 class="fw-title">Loại giày</h4>
                         <ul class="filter-catagories">
-                            <li><a href="#">Men</a></li>
-                            <li><a href="#">Women</a></li>
-                            <li><a href="#">Kids</a></li>
+                            @foreach ($categorys as $category)
+                                <li><a href="{{ route('category',$category->id) }}">{{$category->name}}</a></li>
+                            @endforeach
                         </ul>
                     </div>
                     <div class="filter-widget">
-                        <h4 class="fw-title">Brand</h4>
-                        <div class="fw-brand-check">
-                            <div class="bc-item">
-                                <label for="bc-calvin">
-                                    Calvin Klein
-                                    <input type="checkbox" id="bc-calvin">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="bc-item">
-                                <label for="bc-diesel">
-                                    Diesel
-                                    <input type="checkbox" id="bc-diesel">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="bc-item">
-                                <label for="bc-polo">
-                                    Polo
-                                    <input type="checkbox" id="bc-polo">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                            <div class="bc-item">
-                                <label for="bc-tommy">
-                                    Tommy Hilfiger
-                                    <input type="checkbox" id="bc-tommy">
-                                    <span class="checkmark"></span>
-                                </label>
-                            </div>
-                        </div>
+                        <h4 class="fw-title">Thương hiệu</h4>
+                        <ul class="filter-catagories">
+                            @foreach ($trademarks as $trademark)
+                                <li><a href="{{ route('trademarks',$trademark->id) }}">{{$trademark->name}}</a></li>
+                            @endforeach
+                        </ul>
                     </div>
                     <div class="filter-widget">
-                        <h4 class="fw-title">Price</h4>
+                        <h4 class="fw-title">Giá</h4>
                         <div class="filter-range-wrap">
                             <div class="range-slider">
                                 <div class="price-input">
@@ -75,7 +50,7 @@
                                 </div>
                             </div>
                             <div class="price-range ui-slider ui-corner-all ui-slider-horizontal ui-widget ui-widget-content"
-                                data-min="33" data-max="98">
+                                data-min="{{$min_price}}" data-max="{{$max_price}}">
                                 <div class="ui-slider-range ui-corner-all ui-widget-header"></div>
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
                                 <span tabindex="0" class="ui-slider-handle ui-corner-all ui-state-default"></span>
@@ -84,65 +59,31 @@
                         <a href="#" class="filter-btn">Filter</a>
                     </div>
                     <div class="filter-widget">
-                        <h4 class="fw-title">Color</h4>
-                        <div class="fw-color-choose">
-                            <div class="cs-item">
-                                <input type="radio" id="cs-black">
-                                <label class="cs-black" for="cs-black">Black</label>
-                            </div>
-                            <div class="cs-item">
-                                <input type="radio" id="cs-violet">
-                                <label class="cs-violet" for="cs-violet">Violet</label>
-                            </div>
-                            <div class="cs-item">
-                                <input type="radio" id="cs-blue">
-                                <label class="cs-blue" for="cs-blue">Blue</label>
-                            </div>
-                            <div class="cs-item">
-                                <input type="radio" id="cs-yellow">
-                                <label class="cs-yellow" for="cs-yellow">Yellow</label>
-                            </div>
-                            <div class="cs-item">
-                                <input type="radio" id="cs-red">
-                                <label class="cs-red" for="cs-red">Red</label>
-                            </div>
-                            <div class="cs-item">
-                                <input type="radio" id="cs-green">
-                                <label class="cs-green" for="cs-green">Green</label>
-                            </div>
+                        <h4 class="fw-title">Màu sắc</h4>
+                        <div class="fw-color-choose" style="display: inline-block;">
+                            @foreach ($colors as $color)
+                                <style>
+                                    .filter-widget .fw-color-choose .cs-item label.{{$color->name}}:before {
+                                        border:0.5px solid gray;
+                                        background: {{ $color->color_code }};
+                                    }
+                                </style>
+                                <div class="cs-item">
+                                    <input type="radio" id="{{$color->name}}">
+                                    <label class="{{$color->name}}" for="{{$color->name}}">{{$color->name}}</label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                     <div class="filter-widget">
                         <h4 class="fw-title">Size</h4>
                         <div class="fw-size-choose">
-                            <div class="sc-item">
-                                <input type="radio" id="s-size">
-                                <label for="s-size">s</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" id="m-size">
-                                <label for="m-size">m</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" id="l-size">
-                                <label for="l-size">l</label>
-                            </div>
-                            <div class="sc-item">
-                                <input type="radio" id="xs-size">
-                                <label for="xs-size">xs</label>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="filter-widget">
-                        <h4 class="fw-title">Tags</h4>
-                        <div class="fw-tags">
-                            <a href="#">Towel</a>
-                            <a href="#">Shoes</a>
-                            <a href="#">Coat</a>
-                            <a href="#">Dresses</a>
-                            <a href="#">Trousers</a>
-                            <a href="#">Men's hats</a>
-                            <a href="#">Backpack</a>
+                            @foreach ($sizes as $size)
+                                <div class="sc-item">
+                                    <input type="radio" id="{{ $size->code }}">
+                                    <label for="{{ $size->code }}">{{ $size->name }}</label>
+                                </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
@@ -191,7 +132,7 @@
                                         <div class="pi-content">
                                             <div class="pi-text">
                                                 <div class="catagory-name">{{$product->categorys->name}}</div>
-                                                <a href="#">
+                                                <a href="{{ route('shop-product.show',$product->id) }}">
                                                     <h5>{{$product->name}}</h5>
                                                 </a>
                                                 <div class="product-price">
@@ -302,5 +243,24 @@
             }
             return false;
         }
+    </script>
+    <script>
+        var rangeSlider = $(".price-range"),
+            minamount = $("#minamount"),
+            maxamount = $("#maxamount"),
+            minPrice = rangeSlider.data('min'),
+            maxPrice = rangeSlider.data('max');
+            rangeSlider.slider({
+            range: true,
+            min: minPrice,
+            max: maxPrice,
+            values: [minPrice, maxPrice],
+            slide: function (event, ui) {
+                minamount.val(ui.values[0]);
+                maxamount.val(ui.values[1]);
+            }
+        });
+        minamount.val(rangeSlider.slider("values", 0));
+        maxamount.val(rangeSlider.slider("values", 1));
     </script>
 @endsection

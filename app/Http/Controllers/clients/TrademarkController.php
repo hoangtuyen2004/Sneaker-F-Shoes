@@ -11,11 +11,11 @@ use App\Models\Size;
 use App\Models\Trademark;
 use Illuminate\Http\Request;
 
-class CategoryController extends Controller
+class TrademarkController extends Controller
 {
     //
     public function index(String $id) {
-        $data['products'] = Product::query()->with(['categorys','soles', 'materials', 'trademarks'])->orderBy('id','desc')->where('categorys_id', '=', $id)->get();
+        $data['products'] = Product::query()->with(['categorys','soles', 'materials', 'trademarks'])->orderBy('id','desc')->where('trademarks_id', '=', $id)->get();
         $data['categorys'] = Category::query()->get();
         $data['trademarks'] = Trademark::query()->get();
         $data['max_price'] = Attribute::query()->max('price');

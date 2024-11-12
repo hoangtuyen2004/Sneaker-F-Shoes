@@ -29,6 +29,7 @@ return new class extends Migration
             $table->float('ship',12,2)->default(0);//Phí vận chuyển
             $table->float('coin',12,2);//Thành tiền đơn hàng
             $table->enum('order_type',['Đơn tại quầy', 'Đơn online']);//Loại đơn hàng
+            $table->enum('payment_method',['Thanh toán khi nhận hàng', 'Thanh toán online']);//Phương thức thanh toán
             $table->timestamps();//ngày tạo
         });
     }

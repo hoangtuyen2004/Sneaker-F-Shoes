@@ -1,52 +1,41 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-3">
-            <div class="footer-left">
-                <div class="footer-logo">
-                    <a href="#"><img src="{{ asset('assets/clients/img/footer-logo.png') }}" alt=""></a>
-                </div>
-                <ul>
-                    <li>Address: 60-49 Road 11378 New York</li>
-                    <li>Phone: +65 11.188.888</li>
-                    <li>Email: hello.colorlib@gmail.com</li>
-                </ul>
-                <div class="footer-social">
-                    <a href="#"><i class="fa fa-facebook"></i></a>
-                    <a href="#"><i class="fa fa-instagram"></i></a>
-                    <a href="#"><i class="fa fa-twitter"></i></a>
-                    <a href="#"><i class="fa fa-pinterest"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-2 offset-lg-1">
+        <div class="col-lg-3 offset-lg-1">
             <div class="footer-widget">
-                <h5>Information</h5>
+                <h5>Trang</h5>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Checkout</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="/">Trang chủ</a></li>
+                    <li><a href="{{ route('shop-product.index') }}">Sản phẩm</a></li>
+                    <li><a href="#">Mã giảm giá</a></li>
                     <li><a href="#">Serivius</a></li>
                 </ul>
             </div>
         </div>
-        <div class="col-lg-2">
+        <div class="col-lg-3">
             <div class="footer-widget">
-                <h5>My Account</h5>
-                <ul>
-                    <li><a href="#">My Account</a></li>
-                    <li><a href="#">Contact</a></li>
-                    <li><a href="#">Shopping Cart</a></li>
-                    <li><a href="#">Shop</a></li>
-                </ul>
+                <h5>Tài khoản</h5>
+                @if (Auth::user())
+                    <ul>
+                        <li><a href="{{ route('wp-client.my-account') }}">Tài khoản của tôi</a></li>
+                        <li><a href="{{ route('card.index') }}">Giỏ hàng</a></li>
+                        <li><a href="#">Hóa đơn</a></li>
+                        <li><a href="#">Mã giảm giá</a></li>
+                    </ul>
+                @else
+                    <ul>
+                        <li><a href="{{ route('login') }}">Đăng nhập</a></li>
+                        <li><a href="{{ route('register') }}">Đăng ký</a></li>
+                    </ul>
+                @endif
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-5">
             <div class="newslatter-item">
-                <h5>Join Our Newsletter Now</h5>
-                <p>Get E-mail updates about our latest shop and special offers.</p>
+                <h5>Tìm hóa đơn</h5>
+                <p>Mã hóa đơn của bạn.</p>
                 <form action="#" class="subscribe-form">
-                    <input type="text" placeholder="Enter Your Mail">
-                    <button type="button">Subscribe</button>
+                    <input type="text" placeholder="HD_">
+                    <button type="button">Tìm kiếm</button>
                 </form>
             </div>
         </div>
@@ -57,17 +46,10 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="copyright-text">
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
                     Copyright &copy;
                     <script>
                         document.write(new Date().getFullYear());
-                    </script> All rights reserved | This template is made with <i
-                        class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com"
-                        target="_blank">Colorlib</a>
-                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                </div>
-                <div class="payment-pic">
-                    <img src="{{ asset('assets/clients/img/payment-method.png') }}" alt="">
+                    </script> All rights reserved 
                 </div>
             </div>
         </div>

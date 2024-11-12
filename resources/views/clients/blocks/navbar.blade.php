@@ -1,3 +1,9 @@
+@php
+    use App\Models\Category;
+    use App\Models\Trademark;
+    $LG = Category::query()->get();
+    $TH = Trademark::query()->get();
+@endphp
 <div class="nav-item">
     <div class="container">
         <div class="nav-depart">
@@ -5,14 +11,18 @@
                 <i class="ti-menu"></i>
                 <span>Danh mục</span>
                 <ul class="depart-hover">
-                    <li><a href="#">Women’s Clothing</a></li>
-                    <li><a href="#">Men’s Clothing</a></li>
-                    <li><a href="#">Underwear</a></li>
-                    <li><a href="#">Kid's Clothing</a></li>
-                    <li><a href="#">Brand Fashion</a></li>
-                    <li><a href="#">Accessories/Shoes</a></li>
-                    <li><a href="#">Luxury Brands</a></li>
-                    <li><a href="#">Brand Outdoor Apparel</a></li>
+                    <li>
+                        <h5 style="padding: 0px 30px;margin-top: 14px;padding-bottom: 8px;border-bottom: 1px solid rgb(209, 209, 209)"><strong>Loại giày</strong></h5>
+                    </li>
+                    @foreach ($LG as $category)
+                        <li><a href="{{ route('category',$category->id) }}">{{$category->name}}</a></li>
+                    @endforeach
+                    <li>
+                        <h5 style="padding: 0px 30px;margin-top: 14px;padding-bottom: 8px;border-bottom: 1px solid rgb(209, 209, 209)"><strong>Thương hiệu</strong></h5>
+                    </li>
+                    @foreach ($TH as $trademark)
+                        <li><a href="{{ route('trademarks',$trademark->id) }}">{{$trademark->name}}</a></li>
+                    @endforeach
                 </ul>
             </div>
         </div>

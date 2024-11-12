@@ -45,6 +45,7 @@
             text-align: center;
             justify-content: center;
             color: #ffffff;
+            border: 1px solid gainsboro;
         }
         .color {
             /* display: flex; */

@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\clients\HomeController;
 use App\Http\Middleware\CheckRoleAdminMiddleware;
+use App\Http\Middleware\CheckRoleClientMiddleware;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,3 +61,11 @@ Route::resource('shop-product', App\Http\Controllers\clients\ShopController::cla
 Route::resource('card', App\Http\Controllers\clients\CardController::class);
 // Thanh toán
 Route::resource('order', App\Http\Controllers\clients\OrderController::class);
+
+Route::get('category/{id}', [App\Http\Controllers\clients\CategoryController::class, 'index'])->name('category');
+Route::get('trademark/{id}', [App\Http\Controllers\clients\TrademarkController::class, 'index'])->name('trademarks');
+
+Route::prefix('wp-client')->as('wp-client.')->middleware(CheckRoleClientMiddleware::class)->group(function () {
+    Route::get('my-account', [App\Http\Controllers\clients\AccountController::class, 'index'])->name('my-account');
+    Route::put('my-account/update/{id}', [App\Http\Controllers\clients\AccountController::class, 'update'])->name('my-account.update');
+});
