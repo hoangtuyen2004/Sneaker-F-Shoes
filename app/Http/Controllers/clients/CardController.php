@@ -138,9 +138,10 @@ class CardController extends Controller
         }
         else {
             $cart = Cart::query()->findOrFail($id);
-            dd($cart);
             $quantity = $cart->quanlity;
             $data = ['quanlity'=>$quantity];
+            $cart->update($data);
+            return back();
         }
     }
 
