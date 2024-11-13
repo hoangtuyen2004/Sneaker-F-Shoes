@@ -31,6 +31,9 @@
                 <li><a href="/">Trang chủ</a></li>
                 <li><a href="{{ route('shop-product.index') }}">Sản phẩm</a></li>
                 <li><a href="#">Tra cứu hóa đơn</a></li>
+                @if (Auth::user())
+                    <li><a href="{{ route('wp-client.my-account') }}">Tài khoản</a></li>
+                @endif
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
