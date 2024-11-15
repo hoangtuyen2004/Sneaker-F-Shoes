@@ -21,6 +21,8 @@ class DatabaseSeeder extends Seeder
         $this->call([
             StatusSeeder::class,
             UserSeeder::class,
+            ColorSeeder::class,
+            SizeSeeder::class,
         ]);
     }
 }

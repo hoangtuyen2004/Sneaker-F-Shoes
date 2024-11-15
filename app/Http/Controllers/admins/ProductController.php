@@ -58,6 +58,7 @@ class ProductController extends Controller
             foreach ($attributes as $attribute) {
                 $attribute['sizes_id'] = $request[$attribute['size_code']];
                 $attribute['colors_id'] = $request[$attribute['color_code']];
+                dd($request->all(),$attribute['color_code']);
                 $new_attribute = $new_product->attribute()->create($attribute);
                 $files = $request->file('image');
                 foreach ($files[$attribute['color_code']] as $k => $file) {
