@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admins;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Models\Voucher;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,8 @@ class VoucherController extends Controller
     public function create()
     {
         //
-        return view('admins.vouchers.create');
+        $data['users'] = User::query()->where('role', '=', 'Khách hàng')->get();
+        return view('admins.vouchers.create', $data);
     }
 
     /**
@@ -32,6 +34,7 @@ class VoucherController extends Controller
     public function store(Request $request)
     {
         //
+        dd($request->input());
     }
 
     /**
