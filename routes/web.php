@@ -53,6 +53,8 @@ Route::prefix('wp-admin')->as('wp-admin.')->middleware(CheckRoleAdminMiddleware:
     Route::resource('size', App\Http\Controllers\admins\SizeController::class);
     // Route order
     Route::resource('order', App\Http\Controllers\admins\OrderController::class);
+    // Route voucher
+    Route::resource('voucher', App\Http\Controllers\admins\VoucherController::class);
 });
 
 // Trang danh sách sản phẩm

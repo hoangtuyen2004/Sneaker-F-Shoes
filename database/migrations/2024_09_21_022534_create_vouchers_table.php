@@ -19,12 +19,12 @@ return new class extends Migration
             $table->enum('value', ['Phần trăm', 'Cố định']);//Giá trị giảm
             $table->float('decreased_value',12,2);//Mức giảm
             $table->float('max_value',12,2)->nullable();//Mức giảm tối đa
-            $table->integer('quanlity');//Số lượng mã
+            $table->integer('quantity');//Số lượng mã
+            $table->integer('remaining')->default(0);//Số lượng còn lại
             $table->float('condition',12,2);//Điều kiện sử dụng (cho đơn hàng có mức giá tối thiểu)
             $table->dateTime('date_start');//ngày bắt đầu
             $table->dateTime('date_end');//Ngày kết thúc
             $table->enum('type_code', ['Cá nhân', 'Công khai']);
-            $table->enum('status',['Chưa diễn ra', 'Đang diễn ra', 'Đã ngừng', 'Hết hàng']);
             $table->string('description')->nullable();
             $table->timestamps();//Ngày tạo
         });

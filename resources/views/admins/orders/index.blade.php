@@ -1,6 +1,6 @@
 @extends('layouts.admins')
 @section('title')
-    
+    Hóa đơn
 @endsection
 @section('css')
     <style>
@@ -105,9 +105,6 @@
                         <div class="d-flex justify-content-between">
                             <div>Danh sách</div>
                             <div>
-                                <button id="btnAdd" type="button" class="btn btn-space btn-outline-success" data-bs-toggle="modal" data-bs-target="#myModal">
-                                    Thêm mới <span class="icon mdi mdi-plus-circle"></span>
-                                </button>
                                 <a class="btn btn-space btn-outline-info" href="">Export excel
                                     <span class="icon mdi mdi-download"></span></a>
                             </div>
@@ -189,5 +186,11 @@
 
 @endsection
 @section('js')
-    
+    <script type="text/javascript">
+        $(document).ready(function() {
+            //-initialize the javascript
+            App.init();
+            App.dataTables();
+        });
+    </script>
 @endsection

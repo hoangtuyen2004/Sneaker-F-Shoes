@@ -43,7 +43,6 @@
                                 </li>
                             </ul>
                         </li>
-                        <li class="divider">Features</li>
                         <li class="parent">
                             <a href="#">
                                 <i class="icon mdi mdi-dot-circle"></i><span>Trả hàng</span>
@@ -62,43 +61,8 @@
                                 <i class="icon mdi mdi-view-web"></i><span>Giảm giá</span>
                             </a>
                             <ul class="sub-menu">
-                                <li><a href="layouts-primary-header.html">Primary Header</a>
-                                </li>
-                                <li><a href="layouts-success-header.html">Success Header</a>
-                                </li>
-                                <li><a href="layouts-warning-header.html">Warning Header</a>
-                                </li>
-                                <li><a href="layouts-danger-header.html">Danger Header</a>
-                                </li>
-                                <li><a href="layouts-search-input.html">Search Input</a>
-                                </li>
-                                <li><a href="layouts-offcanvas-menu.html">Off Canvas Menu</a>
-                                </li>
-                                <li><a href="layouts-top-menu.html"><span
-                                            class="badge badge-primary float-right">New</span>Top Menu</a>
-                                </li>
-                                <li><a href="layouts-nosidebar-left.html">Without Left Sidebar</a>
-                                </li>
-                                <li><a href="layouts-nosidebar-right.html">Without Right Sidebar</a>
-                                </li>
-                                <li><a href="layouts-nosidebars.html">Without Both Sidebars</a>
-                                </li>
-                                <li><a href="layouts-fixed-sidebar.html">Fixed Left Sidebar</a>
-                                </li>
-                                <li><a href="layouts-boxed-layout.html"><span
-                                            class="badge badge-primary float-right">New</span>Boxed Layout</a>
-                                </li>
-                                <li><a href="pages-blank-aside.html">Page Aside</a>
-                                </li>
-                                <li><a href="layouts-collapsible-sidebar.html">Collapsible Sidebar</a>
-                                </li>
-                                <li><a href="layouts-sub-navigation.html"><span
-                                            class="badge badge-primary float-right">New</span>Sub
-                                        Navigation</a>
-                                </li>
-                                <li><a href="layouts-mega-menu.html"><span
-                                            class="badge badge-primary float-right">New</span>Mega Menu</a>
-                                </li>
+                                <li><a href="{{ route('wp-admin.voucher.index') }}">Phiếu giảm giá</a></li>
+                                <li><a href="#">Sự kiện giảm giá</a></li>
                             </ul>
                         </li>
                         <li class="parent">
